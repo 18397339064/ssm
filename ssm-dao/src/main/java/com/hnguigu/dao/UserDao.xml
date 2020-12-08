@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.UserDao">
+
+
+	<!-- 添加 -->
+	<insert id="addUser" parameterType="User">
+        INSERT INTO USER VALUE(#{userid},#{useraccount},#{userpwd},#{username},#{usersex},#{userphone},#{useraddress}，#{usersh});
+  </insert>
+
+
+	<!-- 通过条件查询 -->
+	<select id="queryUser" parameterType="User" resultType="User">
+
+		SELECT * FROM user
+		<where>
+			<if test="username!=null">and username like concat('%',#{username},'%')</if>
+
+			<if test="usersex!=null and usersex!=''">and usersex=#{usersex}</if>
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="queryUserCount" parameterType="User" resultType="int">
+
+		SELECT count(*) FROM user
+		<where>
+			<if test="username!=null">and username like concat('%',#{username},'%')</if>
+			<if test="usersex!=null and usersex!=''">and usersex=#{usersex}</if>
+		</where>
+
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="deletePLUser" parameterType="int">
+		delete from user where
+		<foreach collection="array" item="uid" open="uid in(" separator="," close=");">
+			#{userid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from user where userid=#{userid}
+	</delete>
+
+    <!-- 通过id查询数据 -->
+    <select id="queryByUserid" parameterType="int" resultType="User" >
+        select * from user where userid=#{userid}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updateUser" parameterType="User">
+       UPDATE userinfo SET useraccount=#{useraccount},userpwd=#{userpwd},username=#{username},usersex=#{usersex},userphone=#{userphone},useraddress=#{useraddress} ,usersh=#{usersh} WHERE userid=#{userid};
+    </update>
+
+
+</mapper>
