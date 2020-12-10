@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.WarehouseDao">
+
+	<resultMap id="wareHouses" type="Warehouse">
+		<result column="ctid" property="category.ctid"></result>
+		<result column="ctname" property="category.ctname"></result>
+	</resultMap>
+
+
+	<!-- 添加 -->
+	<insert id="addWarehouse" parameterType="Warehouse">
+		INSERT INTO  warehouse value(null,#{whname},#{whaddress},#{category.ctid})
+  </insert>
+
+
+	<!-- 通过条件查询 -->
+	<select id="selWarehouse" parameterType="Warehouse" resultMap="wareHouses">
+
+		SELECT w.*,c.ctname FROM warehouse w left join category c on w.ctid=c.ctid
+		<where>
+			<if test="whname!=null">and whname like concat('%',#{whname},'%')</if>
+
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="selWarehouseCount" parameterType="Warehouse" resultMap="int">
+
+		SELECT count(*) FROM warehouse w left join category c on w.ctid=c.ctid
+		<where>
+			<if test="whname!=null">and whname like concat('%',#{whname},'%')</if>
+		</where>
+
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="delWarehousePL">
+		delete from warehouse where
+		<foreach collection="array" item="whid" open="whid in(" separator="," close=");">
+			#{whid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delWarehouse" parameterType="int">
+		delete from warehouse where whid=#{id}
+	</delete>
+
+    <!-- 通过id查询数据 -->
+    <select id="selWarehouseId" parameterType="int" resultMap="wareHouses" >
+        select * from warehouse w left join category c on w.ctid=c.ctid where whid=#{id}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updWarehouse" parameterType="Warehouse">
+         UPDATE warehouse SET whname=#{whname},whaddress=#{whaddress},ctid=#{category.ctid} WHERE supid=#{supid};
+    </update>
+</mapper>
