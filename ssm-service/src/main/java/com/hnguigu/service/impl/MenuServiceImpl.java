@@ -60,4 +60,17 @@ public class MenuServiceImpl implements MenuService {
         return menuDao.queryByPid();
     }
 
+    @Override
+    public List<Menu> queryAllLeftMenu() {
+        //查询出最大的几个父菜单
+        List<Menu> list=menuDao.queryChilder(0);
+       // List<Menu> list2=menuDao.queryChilder(0);
+
+        for(Menu s:list){
+           s.setChildMenu(menuDao.queryChilder(s.getId()));
+        }
+
+        return list;
+    }
+
 }
