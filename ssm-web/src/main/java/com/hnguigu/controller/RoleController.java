@@ -1,47 +1,46 @@
 package com.hnguigu.controller;
 
-import com.hnguigu.service.UserService;
+import com.hnguigu.service.RoleService;
 import com.hnguigu.vo.PageVo;
-import com.hnguigu.vo.User;
+import com.hnguigu.vo.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
-public class UserController {
+public class RoleController {
 
     @Autowired
-    UserService userService;
-
+    RoleService roleService;
 
     //通过条件查询所有
-    @RequestMapping("/queryusercount.action")
+    @RequestMapping("/queryrolecount.action")
     @ResponseBody
     @CrossOrigin
-    public PageVo<User> queryUserCount(User user,
+    public PageVo<Role> queryRoleCount(Role role,
                                        @RequestParam(value = "page", defaultValue = "1") int page,
-                                       @RequestParam(value = "rows", defaultValue = "10") int rows){
-        return userService.queryUserCount(user,page,rows);
+                                       @RequestParam(value = "rows", defaultValue = "5") int rows){
+        return roleService.queryRoleCount(role,page,rows);
     }
 
-    //注册用户
-    @RequestMapping("/adduser.action")
+    //添加
+    @RequestMapping("/addrole.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> addUser(User user){
+    public Map<String,String> addRole(Role role){
         Map<String,String> map=new HashMap<>();
 
-        int num=userService.addUser(user);
+        int num=roleService.addRole(role);
 
         if(num==1){
-            map.put("msg","注册成功");
+            map.put("msg","添加成功");
             map.put("code","1");
         }else{
-            map.put("msg","注册失败");
+            map.put("msg","添加失败");
             map.put("code","0");
         }
 
@@ -49,13 +48,13 @@ public class UserController {
     }
 
     //修改
-    @RequestMapping("/updateuser.action")
+    @RequestMapping("/updaterole.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> updateUserinfo(User user){
+    public Map<String,String> updateRole(Role role){
         Map<String,String> map=new HashMap<>();
 
-        int num=userService.updateUser(user);
+        int num=roleService.updateRole(role);
 
         if(num==1){
             map.put("msg","修改成功");
@@ -69,15 +68,16 @@ public class UserController {
     }
 
     //批量删除
-    @RequestMapping("/deletepluser.action")
+    @RequestMapping("/deleteplrole.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String, String> deletePLStaff(String ids){
+    public Map<String,String> deletePLRole(String ids){
         Map<String,String> map=new HashMap<>();
+        System.out.println(ids);
 
         String[] idss=ids.split(",");
 
-        int num=userService.deletePLUser(idss);
+        int num=roleService.deletePLRole(idss);
 
         if(num==idss.length){
             map.put("msg","删除成功");
@@ -91,13 +91,13 @@ public class UserController {
     }
 
     //删除
-    @RequestMapping("/deleteuser.action")
+    @RequestMapping("/deleterole.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> deleteUserinfo(int userid){
+    public Map<String,String> deleteRole(int roleid){
         Map<String,String> map=new HashMap<>();
 
-        int num=userService.deleteUser(userid);
+        int num=roleService.deleteRole(roleid);
 
         if(num==1){
             map.put("msg","删除成功");
@@ -109,6 +109,5 @@ public class UserController {
 
         return map;
     }
-
 
 }

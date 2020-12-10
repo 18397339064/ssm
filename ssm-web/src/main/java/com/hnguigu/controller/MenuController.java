@@ -1,47 +1,45 @@
 package com.hnguigu.controller;
 
-import com.hnguigu.service.UserService;
-import com.hnguigu.vo.PageVo;
-import com.hnguigu.vo.User;
+import com.hnguigu.service.MenuService;
+import com.hnguigu.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
-public class UserController {
+public class MenuController {
 
     @Autowired
-    UserService userService;
-
+    MenuService menuService;
 
     //通过条件查询所有
-    @RequestMapping("/queryusercount.action")
+    @RequestMapping("/querymenucount.action")
     @ResponseBody
     @CrossOrigin
-    public PageVo<User> queryUserCount(User user,
+    public PageVo<Menu> queryMenuCount(Menu menu,
                                        @RequestParam(value = "page", defaultValue = "1") int page,
                                        @RequestParam(value = "rows", defaultValue = "10") int rows){
-        return userService.queryUserCount(user,page,rows);
+        return menuService.queryMenuCount(menu,page,rows);
     }
 
-    //注册用户
-    @RequestMapping("/adduser.action")
+    //添加
+    @RequestMapping("/addmenu.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> addUser(User user){
+    public Map<String,String> addMenu(Menu menu){
         Map<String,String> map=new HashMap<>();
 
-        int num=userService.addUser(user);
+        int num=menuService.addMenu(menu);
 
         if(num==1){
-            map.put("msg","注册成功");
+            map.put("msg","添加成功");
             map.put("code","1");
         }else{
-            map.put("msg","注册失败");
+            map.put("msg","添加失败");
             map.put("code","0");
         }
 
@@ -49,13 +47,13 @@ public class UserController {
     }
 
     //修改
-    @RequestMapping("/updateuser.action")
+    @RequestMapping("/updatemenu.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> updateUserinfo(User user){
+    public Map<String,String> updateMenu(Menu menu){
         Map<String,String> map=new HashMap<>();
 
-        int num=userService.updateUser(user);
+        int num=menuService.updateMenu(menu);
 
         if(num==1){
             map.put("msg","修改成功");
@@ -69,15 +67,15 @@ public class UserController {
     }
 
     //批量删除
-    @RequestMapping("/deletepluser.action")
+    @RequestMapping("/deleteplmenu.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String, String> deletePLStaff(String ids){
+    public Map<String,String> deletePLMenu(String ids){
         Map<String,String> map=new HashMap<>();
 
         String[] idss=ids.split(",");
 
-        int num=userService.deletePLUser(idss);
+        int num=menuService.deletePLMenu(idss);
 
         if(num==idss.length){
             map.put("msg","删除成功");
@@ -87,17 +85,17 @@ public class UserController {
             map.put("code","0");
         }
 
+
         return map;
     }
 
     //删除
-    @RequestMapping("/deleteuser.action")
+    @RequestMapping("/deletemenu.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> deleteUserinfo(int userid){
+    public Map<String,String> deleteMenu(int id){
         Map<String,String> map=new HashMap<>();
-
-        int num=userService.deleteUser(userid);
+        int num=menuService.deleteMenu(id);
 
         if(num==1){
             map.put("msg","删除成功");
@@ -106,9 +104,15 @@ public class UserController {
             map.put("msg","删除失败");
             map.put("code","0");
         }
-
         return map;
     }
 
+    //通过父id查询数据
+    @RequestMapping("/querybypid.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Menu> queryByPid(){
+        return menuService.queryByPid();
+    }
 
 }

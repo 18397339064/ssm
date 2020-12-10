@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加 -->
 	<insert id="addUser" parameterType="User">
-        INSERT INTO USER VALUE(#{userid},#{useraccount},#{userpwd},#{username},#{usersex},#{userphone},#{useraddress}，#{usersh});
+        INSERT INTO USER VALUE(#{userid},#{useraccount},#{userpwd},#{username},#{usersex},#{userphone},#{useraddress},0);
   </insert>
 
 
@@ -36,9 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 批量删除 -->
-	<delete id="deletePLUser" parameterType="int">
+	<delete id="deletePLUser">
 		delete from user where
-		<foreach collection="array" item="uid" open="uid in(" separator="," close=");">
+		<foreach collection="array" item="userid" open="userid in(" separator="," close=");">
 			#{userid}
 		</foreach>
 	</delete>
@@ -48,14 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from user where userid=#{userid}
 	</delete>
 
-    <!-- 通过id查询数据 -->
-    <select id="queryByUserid" parameterType="int" resultType="User" >
-        select * from user where userid=#{userid}
-    </select>
-
     <!-- 修改 -->
     <update id="updateUser" parameterType="User">
-       UPDATE userinfo SET useraccount=#{useraccount},userpwd=#{userpwd},username=#{username},usersex=#{usersex},userphone=#{userphone},useraddress=#{useraddress} ,usersh=#{usersh} WHERE userid=#{userid};
+       UPDATE user SET userpwd=#{userpwd},username=#{username},userphone=#{userphone},useraddress=#{useraddress} WHERE userid=#{userid};
     </update>
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.CityDao">
+
+    <resultMap id="citymap" type="City">
+        <id column="cityid" property="cityid"></id>
+        <id column="cityname" property="cityname"></id>
+
+        <association property="province" javaType="Province" column="provinceid" fetchType="lazy">
+            <result column="provinceid" property="provinceid"></result>
+            <result column="provincename" property="provincename"></result>
+        </association>
+
+    </resultMap>
+
+    <!-- 根据省id 查询所有的市信息-->
+    <select id="queryCityByPid" parameterType="City" resultMap="citymap">
+       SELECT * FROM city INNER JOIN province ON city.`provinceid`=province.`provinceid` WHERE  city.`provinceid`=#{provinceid}
+     </select>
+
+</mapper>

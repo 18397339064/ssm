@@ -7,21 +7,17 @@ import java.util.List;
 
 public interface UserService {
 
+    //通过条件查询
+    public PageVo<User> queryUserCount(User user, int page, int rows);
 
     //注册
     public int addUser(User user);
 
-    //通过条件查询
-    public PageVo<User> queryUserCount(User user, int page, int rows);
-
     //批量删除
-    public int deletePLUser(int[] userid);
+    public int deletePLUser(String[] userid);
 
     //删除
     public int deleteUser(int userid);
-
-    //通过id查询数据
-    public User queryByUserid(int userid);
 
     //修改
     public int updateUser(User user);

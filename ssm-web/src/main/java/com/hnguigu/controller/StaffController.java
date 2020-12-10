@@ -23,7 +23,7 @@ public class StaffController {
     @RequestMapping("/querystaff.action")
     @ResponseBody
     public List<Staff>  queryStaff(Staff staff){
-        return staffService.queryStaff(staff);
+        return null;//staffService.queryStaff(staff);
     }
 
     //通过条件查询所有

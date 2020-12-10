@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.AreaDao">
+
+	<resultMap id="areamap" type="Area">
+		<id column="areaid" property="areaid"></id>
+		<id column="areaname" property="areaname"></id>
+
+		<association property="city" javaType="City" column="cityid" fetchType="lazy">
+			<result column="cityid" property="cityid"></result>
+			<result column="cityname" property="cityname"></result>
+		</association>
+
+	</resultMap>
+
+	<!-- 根据市id 查询所有的区信息-->
+	<select id="queryAreaByCid" parameterType="Area" resultMap="areamap">
+       SELECT * FROM area INNER JOIN city ON area.`cityid`=city.`cityid` WHERE area.`cityid`=#{cityid}
+    </select>
+
+
+</mapper>

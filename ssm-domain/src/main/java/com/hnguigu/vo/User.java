@@ -2,7 +2,7 @@ package com.hnguigu.vo;
 
 public class User {
     private Integer userid;    //用户id
-    private String useraccoun; //用户账号
+    private String useraccount; //用户账号
     private  String userpwd;   //用户密码
     private  String username;  //用户姓名
     private  String usersex;   //用户性别
@@ -10,9 +10,9 @@ public class User {
     private  String useraddress;//用户地址
     private  Integer usersh;    //判断是否为商户
 
-    public User(Integer userid, String useraccoun, String userpwd, String username, String usersex, String userphone, String useraddress, Integer usersh) {
+    public User(Integer userid, String useraccount, String userpwd, String username, String usersex, String userphone, String useraddress, Integer usersh) {
         this.userid = userid;
-        this.useraccoun = useraccoun;
+        this.useraccount = useraccount;
         this.userpwd = userpwd;
         this.username = username;
         this.usersex = usersex;
@@ -32,12 +32,12 @@ public class User {
         this.userid = userid;
     }
 
-    public String getUseraccoun() {
-        return useraccoun;
+    public String getUseraccount() {
+        return useraccount;
     }
 
-    public void setUseraccoun(String useraccoun) {
-        this.useraccoun = useraccoun;
+    public void setUseraccount(String useraccount) {
+        this.useraccount = useraccount;
     }
 
     public String getUserpwd() {
@@ -92,7 +92,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "userid=" + userid +
-                ", useraccoun='" + useraccoun + '\'' +
+                ", useraccount='" + useraccount + '\'' +
                 ", userpwd='" + userpwd + '\'' +
                 ", username='" + username + '\'' +
                 ", usersex='" + usersex + '\'' +

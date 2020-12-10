@@ -18,7 +18,8 @@ public class UserServiceImpl implements UserService {
     //注册
     @Override
     public int addUser(User user) {
-        return userDao.addUser(user);
+
+        return 0;//userDao.addUser(user);
     }
 
     //通过条件查询
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     //批量删除
     @Override
-    public int deletePLUser(int[] userid) {
+    public int deletePLUser(String[] userid) {
         return userDao.deletePLUser(userid);
     }
 
@@ -44,12 +45,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUser(int userid) {
         return userDao.deleteUser(userid);
-    }
-
-    //通过id查询
-    @Override
-    public User queryByUserid(int userid) {
-        return userDao.queryByUserid(userid);
     }
 
     //修改
