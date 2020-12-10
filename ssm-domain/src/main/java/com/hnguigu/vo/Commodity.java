@@ -8,16 +8,19 @@ public class Commodity {
 
     private Integer comid;
     private String comname;
-    private Category category;
+    private Category category=new Category();
+    private String comimg;
     private Float comprice;
     private String comsperifications;
     private String complace;
     private Integer comnum;
 
-    public Commodity(Integer comid, String comname, Category category, Float comprice, String comsperifications, String complace, Integer comnum) {
+
+    public Commodity(Integer comid, String comname, Category category, String comimg, Float comprice, String comsperifications, String complace, Integer comnum) {
         this.comid = comid;
         this.comname = comname;
         this.category = category;
+        this.comimg = comimg;
         this.comprice = comprice;
         this.comsperifications = comsperifications;
         this.complace = complace;
@@ -49,6 +52,14 @@ public class Commodity {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getComimg() {
+        return comimg;
+    }
+
+    public void setComimg(String comimg) {
+        this.comimg = comimg;
     }
 
     public Float getComprice() {
