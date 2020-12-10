@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.CommodityDao">
+
+
+	<sql id="selectSql">
+		<where><if test="comname!=null">comname like concat('%',#{comname},'%')</if></where>
+	</sql>
+
+	<resultMap id="BaseMapper" type="Commodity">
+		<collection property="category" column="ctid" javaType="Category"
+					select="com.hnguigu.dao.CategoryDao.queryAllId"
+		    		fetchType="lazy"></collection>
+	</resultMap>
+	
+	
+	<select id="queryAllId" parameterType="int" resultMap="BaseMapper">
+		select * from commodity where comid=#{id}
+	</select>
+
+
+	<select id="queryAll" parameterType="Commodity" resultMap="BaseMapper">
+		select * from commodity
+		<include refid="selectSql"></include>
+	</select>
+
+	<select id="queryAllCount" parameterType="Commodity" resultType="int">
+		select count(*) from commodity
+		<include refid="selectSql"></include>
+	</select>
+
+	<insert id="add" parameterType="Commodity" >
+		insert into commodity values(null,#{comname},#{ctid},#{comimg},
+		#{comprice},#{comsperifications},#{complace},#{comnum})
+	</insert>
+
+	<delete id="delete" parameterType="int" >
+		delete from commodity where comid=#{id}
+	</delete>
+
+	<update id="update" parameterType="Commodity">
+		update commodity set comname=#{comname},ctid=#{ctid},comimg=#{comimg}
+		,comprice=#{comprice},comsperifications=#{comsperifications},complace=#{complace},
+		comnum=#{comnum}
+		where comid=#{comid}
+	</update>
+</mapper>
