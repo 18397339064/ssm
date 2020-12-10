@@ -53,5 +53,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        UPDATE user SET userpwd=#{userpwd},username=#{username},userphone=#{userphone},useraddress=#{useraddress} WHERE userid=#{userid};
     </update>
 
+	<!-- 登录 -->
+	<select id="loginUser" parameterType="User" resultType="User">
 
+		SELECT * FROM user WHERE useraccount=#{useraccount} AND userpwd=#{userpwd};
+
+	</select>
+
+	<!-- 前端注册 -->
+	<insert id="addUser1" parameterType="User">
+         INSERT INTO USER(useraccount,userpwd) VALUES(#{useraccount},#{userpwd})
+  </insert>
 </mapper>

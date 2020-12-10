@@ -110,5 +110,52 @@ public class UserController {
         return map;
     }
 
+    //登录
+    @RequestMapping("/loginuser.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> loginUser(User user, HttpSession session){
+        Map<String,String> map=new HashMap<>();
+        User user1=userService.loginUser(user);
 
+        if(user1!=null){
+            //将对象 存入session
+            session.setAttribute("user",user1);
+            map.put("msg","登录成功");
+            map.put("code","1");
+        }else{
+            map.put("msg","登录失败");
+            map.put("code","0");
+        }
+
+        return map;
+    }
+
+    //前端注册用户
+    @RequestMapping("/adduser1.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> addUser1(User user,String zhuceuserpwd2){
+        Map<String,String> map=new HashMap<>();
+        System.out.println(user.getUserpwd());
+        System.out.println(zhuceuserpwd2);
+
+        if(user.getUserpwd().equals(zhuceuserpwd2)){
+            int num=userService.addUser1(user);
+
+            if(num==1){
+                map.put("msg","注册成功");
+                map.put("code","1");
+            }else{
+                map.put("msg","注册失败");
+                map.put("code","0");
+            }
+        }else{
+            map.put("msg","密码不一致");
+            map.put("code","2");
+        }
+
+
+        return map;
+    }
 }
