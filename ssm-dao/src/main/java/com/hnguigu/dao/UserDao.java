@@ -26,4 +26,5 @@ public interface UserDao {
     public void test01();
 
 
+    public void test02();
 }
