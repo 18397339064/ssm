@@ -29,6 +29,7 @@ public class StaffController {
     //通过条件查询所有
     @RequestMapping("/querystaffcount.action")
     @ResponseBody
+    @CrossOrigin
     public PageVo<Staff> queryStaffCount(Staff staff,
                                     @RequestParam(value = "page", defaultValue = "1") int page,
                                     @RequestParam(value = "rows", defaultValue = "10") int rows){
@@ -38,6 +39,7 @@ public class StaffController {
     //注册员工
     @RequestMapping("/addstaff.action")
     @ResponseBody
+    @CrossOrigin
     public Map<String,String> addStaff(Staff staff){
         Map<String,String> map=new HashMap<>();
 
@@ -57,6 +59,7 @@ public class StaffController {
     //通过id查询数据
     @RequestMapping("/querybystaid.action")
     @ResponseBody
+    @CrossOrigin
     public Staff queryByStaid(int staid){
         return staffService.queryByStaid(staid);
     }
@@ -64,6 +67,7 @@ public class StaffController {
     //修改
     @RequestMapping("/updatestaff.action")
     @ResponseBody
+    @CrossOrigin
     public Map<String,String> updateStaff(Staff staff){
         Map<String,String> map=new HashMap<>();
 
@@ -83,6 +87,7 @@ public class StaffController {
     //批量删除
     @RequestMapping(value = "/deleteplstaff.action/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
+    @CrossOrigin
     public boolean deletePLStaff(@PathVariable String ids){
         String[] idss=ids.split(",");
         int[] ints=new int[idss.length];
@@ -98,6 +103,7 @@ public class StaffController {
     //删除
     @RequestMapping("/deletestaff.action")
     @ResponseBody
+    @CrossOrigin
     public Map<String,String> deleteStaff(int staid){
         Map<String,String> map=new HashMap<>();
 
