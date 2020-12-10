@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int addUser(User user) {
 
-        return 0;//userDao.addUser(user);
+        return userDao.addUser(user);
     }
 
     //通过条件查询
