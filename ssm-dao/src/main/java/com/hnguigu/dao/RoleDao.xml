@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.RoleDao">
+
+	<!-- 通过条件查询 -->
+	<select id="queryRole" parameterType="Role" resultType="Role">
+
+		SELECT * FROM role
+		<where>
+			<if test="rolename!=null">and rolename like concat('%',#{rolename},'%')</if>
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="queryRoleCount" parameterType="Role" resultType="int">
+
+		SELECT count(*) FROM role
+		<where>
+			<if test="rolename!=null">and rolename like concat('%',#{rolename},'%')</if>
+		</where>
+
+	</select>
+
+	<!-- 添加 -->
+	<insert id="addRole" parameterType="Role">
+        INSERT INTO role VALUE(#{roleid},#{rolename});
+  </insert>
+
+
+	<!-- 修改 -->
+	<update id="updateRole" parameterType="Role">
+         UPDATE role SET rolename=#{rolename} WHERE roleid=#{roleid};
+    </update>
+
+	<!-- 批量删除 -->
+	<delete id="deletePLRole">
+		delete from role where
+		<foreach collection="array" item="roleid" open="roleid in(" separator="," close=");">
+			#{roleid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="deleteRole" parameterType="int">
+		delete from role where roleid=#{roleid}
+	</delete>
+</mapper>
