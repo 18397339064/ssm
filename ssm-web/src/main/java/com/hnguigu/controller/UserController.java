@@ -23,8 +23,8 @@ public class UserController {
     @ResponseBody
     @CrossOrigin
     public PageVo<User> queryUserCount(User user,
-                                    @RequestParam(value = "page", defaultValue = "1") int page,
-                                    @RequestParam(value = "rows", defaultValue = "10") int rows){
+                                       @RequestParam(value = "page", defaultValue = "1") int page,
+                                       @RequestParam(value = "rows", defaultValue = "10") int rows){
         return userService.queryUserCount(user,page,rows);
     }
 

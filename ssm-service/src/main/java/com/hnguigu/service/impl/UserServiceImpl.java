@@ -18,7 +18,8 @@ public class UserServiceImpl implements UserService {
     //注册
     @Override
     public int addUser(User user) {
-        return userDao.addUser(user);
+
+        return 0;//userDao.addUser(user);
     }
 
     //通过条件查询

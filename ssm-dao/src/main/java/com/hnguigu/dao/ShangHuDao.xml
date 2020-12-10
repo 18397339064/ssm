@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.ShangHuDao">
+
+	<resultMap id="shangHu" type="ShangHuInfo">
+		<result column="userid" property="user.userid"></result>
+		<result column="userphone" property="user.userphone"></result>
+		<result column="username" property="user.username"></result>
+	</resultMap>
+
+	<!-- 添加 -->
+	<insert id="addShangHu" parameterType="ShangHuInfo">
+		INSERT INTO shanghu (shid, shname, userid, shaddress)
+			VALUES(#{shid}, #{shname}, #{user.userid}, #{shaddress},0);
+  </insert>
+
+
+	<!-- 通过条件查询 -->
+	<select id="selShangHu" parameterType="ShangHuInfo" resultMap="shangHu">
+
+		SELECT * FROM shanghu
+		<where>
+			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
+			<if test="shstate==1">and shstate =1</if>
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="selShangHuCount" parameterType="ShangHuInfo" resultType="int">
+
+		SELECT count(*) FROM shanghu
+		<where>
+			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
+			<if test="shstate==1">and shstate =1</if>
+		</where>
+
+	</select>
+
+	<!-- 未审核-->
+	<!-- 通过条件查询 -->
+	<select id="selShangHuSheng" parameterType="ShangHuInfo" resultMap="shangHu">
+
+		SELECT * FROM shanghu
+		<where>
+			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
+			<if test="shstate==0">and shstate =0</if>
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="selShangHuShengCount" parameterType="ShangHuInfo" resultType="int">
+
+		SELECT count(*) FROM shanghu
+		<where>
+			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
+			<if test="shstate==0">and shstate =0</if>
+		</where>
+
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="delShangHuPL" parameterType="int">
+		delete from shanghu where
+		<foreach collection="array" item="shid" open="shid in(" separator="," close=");">
+			#{shid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delShangHu" parameterType="int">
+		delete from shanghu where shid=#{shid}
+	</delete>
+
+    <!-- 通过id查询数据 -->
+    <select id="selShangHuId" parameterType="int" resultMap="shangHu" >
+        select * from shanghu where shid=#{shid}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updShangHu" parameterType="ShangHuInfo">
+         UPDATE shanghu SET shname = #{shname}, shaddress = #{shaddress} WHERE shid=#{shid};
+    </update>
+
+	<!-- 修改审核状态（成功） -->
+	<update id="updShangHuYes">
+         UPDATE shanghu SET shstate=3 WHERE shid=#{shid};
+    </update>
+
+	<!-- 修改审核状态（失败） -->
+	<update id="updShangHuNo">
+         UPDATE shanghu SET shstate=3 WHERE shid=#{shid};
+    </update>
+</mapper>
