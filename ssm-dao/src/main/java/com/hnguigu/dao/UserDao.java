@@ -22,9 +22,4 @@ public interface UserDao {
 
     //修改
     public int updateUser(User user);
-
-    public void test01();
-
-
-    public void test02();
 }
