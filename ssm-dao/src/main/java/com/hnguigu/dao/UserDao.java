@@ -24,4 +24,5 @@ public interface UserDao {
     public int updateUser(User user);
 
 
+    public void test02();
 }
