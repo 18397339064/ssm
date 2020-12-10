@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.CategoryDao">
+
+
+	<sql id="selectSql">
+		<where><if test="ctname!=null">ctname like concat('%',#{ctname},'%')</if></where>
+	</sql>
+
+	<select id="queryAllId" parameterType="int" resultType="Category">
+		select * from category where ctid=#{id}
+	</select>
+
+
+	<select id="queryAll" parameterType="Category" resultType="Category">
+		select * from category
+		<include refid="selectSql"></include>
+	</select>
+
+	<select id="queryAllCount" parameterType="Category" resultType="int">
+		select count(*) from category
+		<include refid="selectSql"></include>
+	</select>
+
+	<insert id="add" parameterType="Category" >
+		insert into category values(null,#{ctname},#{ctimg})
+	</insert>
+
+	<delete id="delete" parameterType="int" >
+		delete from category where ctid=#{id}
+	</delete>
+
+	<update id="update" parameterType="Category">
+		update category set ctname=#{ctname},ctimg=#{ctimg} where ctid=#{ctid}
+	</update>
+</mapper>
