@@ -6,8 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hnguigu.dao.WarehouseDao">
 
 	<resultMap id="wareHouses" type="Warehouse">
-		<result column="ctid" property="category.ctid"></result>
-		<result column="ctname" property="category.ctname"></result>
+		<collection property="category" column="ctid" javaType="Category"
+					select="com.hnguigu.dao.CategoryDao.queryAllId"
+		fetchType="lazy"></collection>
 	</resultMap>
 
 
@@ -29,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 通过条件查询记录 -->
-	<select id="selWarehouseCount" parameterType="Warehouse" resultMap="int">
+	<select id="selWarehouseCount" parameterType="Warehouse" resultType="int">
 
 		SELECT count(*) FROM warehouse w left join category c on w.ctid=c.ctid
 		<where>

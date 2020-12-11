@@ -25,7 +25,9 @@ public class CommodityController {
     @RequestMapping("/queryAllCommodity.action")
     @ResponseBody
     @CrossOrigin
-    public String queryAllCommodity(Commodity commodity,int page,int rows){
+    public String queryAllCommodity(Commodity commodity,
+                                    @RequestParam(value = "page",defaultValue = "1") int page,
+                                    @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return JSONObject.toJSONString(commodityService.queryAll(commodity,page,rows));
     }
