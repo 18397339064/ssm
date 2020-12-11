@@ -21,7 +21,7 @@ public interface ShangHuDao {
     public int selShangHuShengCount(ShangHuInfo shangHuInfo);
 
     //根据id查询商户
-    public ShangHuInfo selShangHuId(int id);
+    public ShangHuInfo selShangHuId(int shid);
 
     //修改商户
     public int updShangHu(ShangHuInfo shangHuInfo);
@@ -33,8 +33,8 @@ public interface ShangHuDao {
     public int updShangHuNo();
 
     //删除商户
-    public int delShangHu(int id);
+    public int delShangHu(int shid);
 
     //批量删除
-    public int delShangHuPL(int[] id);
+    public int delShangHuPL(int[] shid);
 }

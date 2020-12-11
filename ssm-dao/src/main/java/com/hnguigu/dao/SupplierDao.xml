@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.SupplierDao">
+
+
+
+	<!-- 添加 -->
+	<insert id="addSupplier" parameterType="Supplier">
+		INSERT INTO  supplier value(null,#{supname},#{suppeople},#{supphone},#{supaddress})
+  </insert>
+
+
+	<!-- 通过条件查询 -->
+	<select id="selSupplier" parameterType="Supplier" resultType="Supplier">
+
+		SELECT * FROM supplier
+		<where>
+			<if test="supname!=null">and supname like concat('%',#{supname},'%')</if>
+
+		</where>
+
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="selSupplierCount" parameterType="Supplier" resultType="int">
+
+		SELECT count(*) FROM supplier
+		<where>
+			<if test="supname!=null">and supname like concat('%',#{supname},'%')</if>
+		</where>
+
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="delSupplierPL">
+		delete from supplier where
+		<foreach collection="array" item="supid" open="supid in(" separator="," close=");">
+			#{supid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delSupplier" parameterType="int">
+		delete from supplier where supid=#{supid}
+	</delete>
+
+    <!-- 通过id查询数据 -->
+    <select id="selSupplierId" parameterType="int" resultType="Supplier" >
+        select * from supplier where supid=#{supid}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updSupplier" parameterType="Supplier">
+         UPDATE supplier SET supname=#{supname},suppeople=#{suppeople},supphone=#{supphone},supaddress=#{supaddress} WHERE supid=#{supid};
+    </update>
+</mapper>
