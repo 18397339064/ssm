@@ -69,4 +69,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from menu
          where nodetype=1 OR nodetype=2
     </select>
+
+
+	<select id="queryChilder" parameterType="long" resultMap="menumap">
+		select * from menu where parentid=#{id}
+	</select>
+
+
 </mapper>

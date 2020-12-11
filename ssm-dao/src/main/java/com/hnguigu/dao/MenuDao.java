@@ -27,4 +27,8 @@ public interface MenuDao {
 
     //查询父菜单
     public List<Menu> queryByPid();
+
+    //查询子菜单
+    public List<Menu> queryChilder(long id);
+
 }

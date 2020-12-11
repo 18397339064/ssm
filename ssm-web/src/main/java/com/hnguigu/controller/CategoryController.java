@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -21,7 +22,9 @@ public class CategoryController {
     @RequestMapping("/queryAllCategory.action")
     @ResponseBody
     @CrossOrigin
-    public PageVo queryAllCategory(Category category, int page, int rows){
+    public PageVo queryAllCategory(Category category,
+                                   @RequestParam(value = "page",defaultValue = "1") int page,
+                                   @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return categoryService.queryAll(category,page,rows);
     }

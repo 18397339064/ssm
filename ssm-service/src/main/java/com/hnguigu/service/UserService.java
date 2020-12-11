@@ -22,4 +22,10 @@ public interface UserService {
     //修改
     public int updateUser(User user);
 
+    //登录
+    public User loginUser(User user);
+
+    //前端注册
+    public int addUser1(User user);
+
 }

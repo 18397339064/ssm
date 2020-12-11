@@ -52,4 +52,18 @@ public class UserServiceImpl implements UserService {
     public int updateUser(User userinfo) {
         return userDao.updateUser(userinfo);
     }
+
+    //登录
+    @Override
+    public User loginUser(User user) {
+        return userDao.loginUser(user);
+    }
+
+    //前端注册
+    @Override
+    public int addUser1(User user) {
+        return userDao.addUser1(user);
+    }
+
+
 }

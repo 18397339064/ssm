@@ -26,4 +26,6 @@ public interface MenuService {
     //查询父菜单
     public List<Menu> queryByPid();
 
+    //查询左边菜单
+    List<Menu> queryAllLeftMenu();
 }
