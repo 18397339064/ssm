@@ -75,5 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from menu where parentid=#{id}
 	</select>
 
+	<select id="queryNodeType" parameterType="int" resultMap="menumap">
+		select * from menu where nodetype=#{id}
+	</select>
+
 
 </mapper>

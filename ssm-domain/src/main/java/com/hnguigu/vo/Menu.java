@@ -56,12 +56,32 @@ public class Menu {
     /**
      * 子菜单集合
      */
+
+    private String label;
+
     List<Menu> childMenu;
 
     //权限数据回显 点击选中一个角色  如果该角色拥有此菜单
     //操作权限，checked 为true
     private boolean checked;
 
+    List<Menu> children;
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
 
     public Long getId() {
         return id;

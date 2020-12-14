@@ -31,4 +31,8 @@ public interface MenuDao {
     //查询子菜单
     public List<Menu> queryChilder(long id);
 
+    //查询 级数 菜单
+    public List<Menu> queryNodeType(int id);
+
+
 }

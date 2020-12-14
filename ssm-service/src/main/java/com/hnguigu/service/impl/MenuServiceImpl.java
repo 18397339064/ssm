@@ -73,4 +73,25 @@ public class MenuServiceImpl implements MenuService {
         return list;
     }
 
+    @Override
+    public List<Menu> queryAuthorMenu() {
+        //查询出顶级菜单
+        List<Menu> list=menuDao.queryNodeType(1);
+
+        for(Menu s:list){
+            s.setLabel(s.getName());
+            s.setChildren(menuDao.queryChilder(s.getId()));
+
+            for(Menu s2:s.getChildren()){
+                 s2.setLabel(s2.getName());
+                 s2.setChildren(menuDao.queryChilder(s2.getId()));
+            }
+        }
+
+
+
+        return list;
+    }
+
+
 }

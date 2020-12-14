@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface StaffDao {
 
-
-
     //注册
     public int addStaff(Staff staff);
 

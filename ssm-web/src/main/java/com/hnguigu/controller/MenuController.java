@@ -124,4 +124,13 @@ public class MenuController {
 
         return menuService.queryAllLeftMenu();
     }
+
+    //查询授权菜单
+    @RequestMapping("/queryAuthorMenu.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Menu> queryAuthorMenu(){
+
+        return menuService.queryAuthorMenu();
+    }
 }
