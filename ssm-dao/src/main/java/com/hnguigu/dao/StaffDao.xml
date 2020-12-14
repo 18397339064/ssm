@@ -39,10 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 批量删除 -->
-	<delete id="deletePLStaff" parameterType="int">
+	<delete id="deletePLStaff">
 		delete from staff where
 		<foreach collection="array" item="staffid" open="staffid in(" separator="," close=");">
-			#{staid}
+			#{staffid}
 		</foreach>
 	</delete>
 

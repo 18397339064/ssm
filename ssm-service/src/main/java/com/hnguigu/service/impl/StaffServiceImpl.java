@@ -40,14 +40,14 @@ public class StaffServiceImpl implements StaffService {
 
     //批量删除
     @Override
-    public int deletePLStaff(int[] staid) {
-        return staffDao.deletePLStaff(staid);
+    public int deletePLStaff(String[] staffid) {
+        return staffDao.deletePLStaff(staffid);
     }
 
     //删除
     @Override
-    public int deleteStaff(int staid) {
-        return staffDao.deleteStaff(staid);
+    public int deleteStaff(int staffid) {
+        return staffDao.deleteStaff(staffid);
     }
 
     //通过id查询
