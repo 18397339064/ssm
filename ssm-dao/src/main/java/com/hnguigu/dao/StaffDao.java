@@ -16,7 +16,7 @@ public interface StaffDao {
     public int queryStaffCount(Staff staff);
 
     //批量删除
-    public int deletePLStaff(int[] staffid);
+    public int deletePLStaff(String[] staffid);
 
     //删除
     public int deleteStaff(int staffid);

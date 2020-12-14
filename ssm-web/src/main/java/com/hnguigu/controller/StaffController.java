@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class StaffController {
@@ -22,6 +20,7 @@ public class StaffController {
     //查询
     @RequestMapping("/querystaff.action")
     @ResponseBody
+    @CrossOrigin
     public List<Staff>  queryStaff(Staff staff){
         return null;//staffService.queryStaff(staff);
     }
@@ -85,29 +84,34 @@ public class StaffController {
     }
 
     //批量删除
-    @RequestMapping(value = "/deleteplstaff.action/{ids}",method = RequestMethod.DELETE)
+    @RequestMapping("/deleteplstaff.action")
     @ResponseBody
     @CrossOrigin
-    public boolean deletePLStaff(@PathVariable String ids){
+    public Map<String,String> deletePLStaff(String ids){
+        Map<String,String> map=new HashMap<>();
         String[] idss=ids.split(",");
-        int[] ints=new int[idss.length];
-        for(int i=0;i<idss.length;i++){
-            ints[i]=Integer.parseInt(idss[i]);
+
+        int num=staffService.deletePLStaff(idss);
+
+        if(num==idss.length){
+            map.put("msg","删除成功");
+            map.put("code","1");
+        }else{
+            map.put("msg","删除失败");
+            map.put("code","0");
         }
 
-        int num=staffService.deletePLStaff(ints);
-
-        return num>0;
+        return map;
     }
 
     //删除
     @RequestMapping("/deletestaff.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> deleteStaff(int staid){
+    public Map<String,String> deleteStaff(@RequestParam(defaultValue = "0") int staffid){
         Map<String,String> map=new HashMap<>();
 
-        int num=staffService.deleteStaff(staid);
+        int num=staffService.deleteStaff(staffid);
 
         if(num==1){
             map.put("msg","删除成功");

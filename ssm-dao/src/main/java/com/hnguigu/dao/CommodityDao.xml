@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<sql id="selectSql">
-		<where><if test="comname!=null">comname like concat('%',#{comname},'%')</if></where>
+		<where>
+			<if test="comname!=null">comname like concat('%',#{comname},'%')</if>
+		</where>
 	</sql>
 
 	<resultMap id="BaseMapper" type="Commodity">

@@ -41,7 +41,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public int update(Commodity category) {
-        return commodityDao.update(category);
+    public int update(Commodity commodity) {
+        return commodityDao.update(commodity);
     }
 }
