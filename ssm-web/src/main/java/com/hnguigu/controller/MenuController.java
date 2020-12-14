@@ -115,4 +115,13 @@ public class MenuController {
         return menuService.queryByPid();
     }
 
+
+    //查询左边菜单
+    @RequestMapping("/queryAllLeftMenu.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Menu> queryAllLeftMenu(){
+
+        return menuService.queryAllLeftMenu();
+    }
 }

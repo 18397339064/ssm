@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 通过条件查询 -->
 	<select id="selShangHu" parameterType="ShangHuInfo" resultMap="shangHu">
 
-		SELECT * FROM shanghu
+		SELECT s.*,u.userphone,u.username FROM shanghu s left join user u on s.userid = u.userid
 		<where>
 			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
 			<if test="shstate==1">and shstate =1</if>
@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 通过条件查询记录 -->
 	<select id="selShangHuCount" parameterType="ShangHuInfo" resultType="int">
 
-		SELECT count(*) FROM shanghu
+		SELECT count(*) FROM shanghu s left join user u on s.userid = u.userid
 		<where>
 			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
 			<if test="shstate==1">and shstate =1</if>
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 通过条件查询 -->
 	<select id="selShangHuSheng" parameterType="ShangHuInfo" resultMap="shangHu">
 
-		SELECT * FROM shanghu
+		SELECT *s.*,u.userphone,u.username FROM shanghu s left join user u on s.userid = u.userid
 		<where>
 			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
 			<if test="shstate==0">and shstate =0</if>
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 通过条件查询记录 -->
 	<select id="selShangHuShengCount" parameterType="ShangHuInfo" resultType="int">
 
-		SELECT count(*) FROM shanghu
+		SELECT count(*) FROM shanghu s left join user u on s.userid = u.userid
 		<where>
 			<if test="shname!=null">and shname like concat('%',#{shname},'%')</if>
 			<if test="shstate==0">and shstate =0</if>
@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 通过id查询数据 -->
     <select id="selShangHuId" parameterType="int" resultMap="shangHu" >
-        select * from shanghu where shid=#{shid}
+        select * from shanghu s left join user u on s.userid = u.userid where shid=#{shid}
     </select>
 
     <!-- 修改 -->

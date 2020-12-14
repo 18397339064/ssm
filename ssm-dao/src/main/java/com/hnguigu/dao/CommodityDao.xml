@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<sql id="selectSql">
-		<where><if test="comname!=null">comname like concat('%',#{comname},'%')</if></where>
+		<where>
+			<if test="comname!=null">comname like concat('%',#{comname},'%')</if>
+		</where>
 	</sql>
 
 	<resultMap id="BaseMapper" type="Commodity">
@@ -33,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="add" parameterType="Commodity" >
-		insert into commodity values(null,#{comname},#{ctid},#{comimg},
+		insert into commodity values(null,#{comname},#{category.ctid},#{comimg},
 		#{comprice},#{comsperifications},#{complace},#{comnum})
 	</insert>
 
@@ -42,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<update id="update" parameterType="Commodity">
-		update commodity set comname=#{comname},ctid=#{ctid},comimg=#{comimg}
+		update commodity set comname=#{comname},ctid=#{category.ctid},comimg=#{comimg}
 		,comprice=#{comprice},comsperifications=#{comsperifications},complace=#{complace},
 		comnum=#{comnum}
 		where comid=#{comid}
