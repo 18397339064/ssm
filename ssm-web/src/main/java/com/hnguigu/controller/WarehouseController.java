@@ -19,17 +19,17 @@ public class WarehouseController {
     @Autowired
     WarehouseService warehouseService;
 
-    //查询供应商
+    //查询仓库
     @RequestMapping("/selWarehouse.action")
     @ResponseBody
     @CrossOrigin
     public PageVo<Warehouse> selWarehouse(Warehouse warehouse,
-                                          @RequestParam("page")int page,
-                                          @RequestParam("rows")int rows){
+                                          @RequestParam(value = "page",defaultValue = "1")int page,
+                                          @RequestParam(value = "rows",defaultValue = "10")int rows){
         return warehouseService.selWarehouse(warehouse,page,rows);
     }
 
-    //根据供应商id查询供应商
+    //根据仓库id查询仓库
     @RequestMapping("/selWarehouseID.action")
     @ResponseBody
     @CrossOrigin
@@ -37,7 +37,7 @@ public class WarehouseController {
         return warehouseService.selWarehouseId(whid);
     }
 
-    //添加供应商
+    //添加仓库
     @RequestMapping("/addWarehouse.action")
     @ResponseBody
     @CrossOrigin
@@ -55,7 +55,7 @@ public class WarehouseController {
         return map;
     }
 
-    //修改供应商
+    //修改仓库
     @RequestMapping("/updWarehouse.action")
     @ResponseBody
     @CrossOrigin
@@ -73,7 +73,7 @@ public class WarehouseController {
         return map;
     }
 
-    //删除供应商
+    //删除仓库
     @RequestMapping("/delWarehouse.action")
     @ResponseBody
     @CrossOrigin
