@@ -1,6 +1,7 @@
 package com.hnguigu.dao;
 
 import com.hnguigu.vo.Staff;
+import com.hnguigu.vo.User;
 
 import java.util.List;
 
@@ -26,5 +27,11 @@ public interface StaffDao {
 
     //修改
     public int updateStaff(Staff staff);
+
+    //查询员工账号
+    public Staff queryStaffAccount(String staffaccount);
+
+    //登录
+    public Staff loginStaff(Staff staff);
 
 }

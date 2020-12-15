@@ -60,4 +60,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateStaff" parameterType="Staff">
          UPDATE staff SET staffaccount=#{staffaccount},staffpwd=#{staffpwd},staffname=#{staffname},staffsex=#{staffsex},staffphone=#{staffphone} WHERE staffid=#{staffid};
     </update>
+
+	<!-- 查询员工账号 -->
+	<select id="queryStaffAccount" parameterType="String" resultType="Staff">
+
+		  SELECT * FROM staff WHERE staffaccount=#{staffaccount}
+
+	</select>
+
+	<!-- 登录 -->
+	<select id="loginStaff" parameterType="Staff" resultType="Staff">
+
+		SELECT * FROM staff WHERE staffaccount=#{staffaccount} AND staffpwd=#{staffpwd};
+
+	</select>
 </mapper>

@@ -21,13 +21,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 通过条件查询 -->
 	<select id="selWarehouse" parameterType="Warehouse" resultMap="wareHouses">
 
-		SELECT w.*,c.ctname FROM warehouse w left join category c on w.ctid=c.ctid
+		SELECT * FROM warehouse w left join category c on w.ctid=c.ctid
 		<where>
 			<if test="whname!=null">and whname like concat('%',#{whname},'%')</if>
-
+			<if test="category.ctid!=null">and w.ctid=#{category.ctid}</if>
 		</where>
 
 	</select>
+
 
 	<!-- 通过条件查询记录 -->
 	<select id="selWarehouseCount" parameterType="Warehouse" resultType="int">
@@ -35,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT count(*) FROM warehouse w left join category c on w.ctid=c.ctid
 		<where>
 			<if test="whname!=null">and whname like concat('%',#{whname},'%')</if>
+			<if test="category.ctid!=null">and w.ctid=#{category.ctid}</if>
 		</where>
 
 	</select>

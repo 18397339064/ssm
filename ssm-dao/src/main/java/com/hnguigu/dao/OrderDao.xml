@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.OrderDao">
+
+	<resultMap id="ordermap" type="Orders">
+		<id column="orderid" property="orderid"></id>
+		<id column="ordertime" property="ordertime"></id>
+		<id column="ordercount" property="ordercount"></id>
+		<id column="totalmoney" property="totalmoney"></id>
+		<id column="orderstate" property="orderstate"></id>
+
+		<association property="commodity" javaType="Commodity" column="comid" fetchType="lazy">
+			<result column="comid" property="comid"></result>
+			<result column="comname" property="comname"></result>
+			<result column="comimg" property="comimg"></result>
+		</association>
+
+		<association property="user" javaType="User" column="userid" fetchType="lazy">
+			<result column="userid" property="userid"></result>
+			<result column="username" property="username"></result>
+		</association>
+
+		<association property="shangHuInfo" javaType="ShangHuInfo" column="shid" fetchType="lazy">
+			<result column="shid" property="shid"></result>
+			<result column="shaddress" property="shaddress"></result>
+		</association>
+	</resultMap>
+
+	<!-- 通过条件查询 -->
+	<select id="queryOrder" parameterType="Orders" resultMap="ordermap">
+
+		SELECT * FROM orders INNER JOIN commodity ON orders.comid=commodity.comid
+		INNER JOIN USER ON user.`userid`=orders.`userid`
+		INNER JOIN shanghu ON shanghu.`shid`=orders.`shid`
+		<where>
+			<!--<if test="true">and user.`userid`=#{userid}</if>-->
+			<if test="orderstate!=null and orderstate!=''">and orderstate=#{orderstate}</if>
+		</where>
+	</select>
+
+	<!-- 通过条件查询记录 -->
+	<select id="queryOrderCount" parameterType="Orders" resultType="int">
+
+		SELECT count(*) FROM orders INNER JOIN commodity ON orders.comid=commodity.comid
+		INNER JOIN USER ON user.`userid`=orders.`userid`
+		INNER JOIN shanghu ON shanghu.`shid`=orders.`shid`
+		<where>
+			<!--<if test="true">and user.`userid`=#{userid}</if>-->
+			<if test="orderstate!=null and orderstate!=''">and orderstate=#{orderstate}</if>
+		</where>
+	</select>
+
+</mapper>

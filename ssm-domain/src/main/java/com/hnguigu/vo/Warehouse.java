@@ -1,5 +1,8 @@
 package com.hnguigu.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value="handler")
 public class Warehouse {
     private int whid;
     private String whname;

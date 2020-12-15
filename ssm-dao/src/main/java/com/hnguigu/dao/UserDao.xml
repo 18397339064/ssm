@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加 -->
 	<insert id="addUser" parameterType="User">
-        INSERT INTO USER VALUE(#{userid},#{useraccount},#{userpwd},#{username},#{usersex},#{userphone},#{useraddress},0);
+        INSERT INTO USER VALUE(#{userid},#{useraccount},#{userpwd},#{username},#{usersex},#{userphone},0);
   </insert>
 
 
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 修改 -->
     <update id="updateUser" parameterType="User">
-       UPDATE user SET userpwd=#{userpwd},username=#{username},userphone=#{userphone},useraddress=#{useraddress} WHERE userid=#{userid};
+       UPDATE user SET userpwd=#{userpwd},username=#{username},userphone=#{userphone} WHERE userid=#{userid};
     </update>
 
 	<!-- 登录 -->
@@ -64,4 +64,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addUser1" parameterType="User">
          INSERT INTO USER(useraccount,userpwd) VALUES(#{useraccount},#{userpwd})
   </insert>
+
+	<!-- 查询用户账号 -->
+	<select id="queryUserAccount" parameterType="String" resultType="User">
+
+		  SELECT * FROM USER WHERE useraccount=#{useraccount}
+
+	</select>
 </mapper>

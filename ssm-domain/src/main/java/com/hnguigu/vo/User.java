@@ -7,17 +7,15 @@ public class User {
     private  String username;  //用户姓名
     private  String usersex;   //用户性别
     private  String userphone; //电话号码
-    private  String useraddress;//用户地址
     private  Integer usersh;    //判断是否为商户
 
-    public User(Integer userid, String useraccount, String userpwd, String username, String usersex, String userphone, String useraddress, Integer usersh) {
+    public User(Integer userid, String useraccount, String userpwd, String username, String usersex, String userphone,Integer usersh) {
         this.userid = userid;
         this.useraccount = useraccount;
         this.userpwd = userpwd;
         this.username = username;
         this.usersex = usersex;
         this.userphone = userphone;
-        this.useraddress = useraddress;
         this.usersh = usersh;
     }
 
@@ -72,14 +70,6 @@ public class User {
         this.userphone = userphone;
     }
 
-    public String getUseraddress() {
-        return useraddress;
-    }
-
-    public void setUseraddress(String useraddress) {
-        this.useraddress = useraddress;
-    }
-
     public Integer getUsersh() {
         return usersh;
     }
@@ -97,7 +87,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", usersex='" + usersex + '\'' +
                 ", userphone='" + userphone + '\'' +
-                ", useraddress='" + useraddress + '\'' +
                 ", usersh=" + usersh +
                 '}';
     }

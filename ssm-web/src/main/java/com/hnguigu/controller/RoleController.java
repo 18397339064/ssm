@@ -110,4 +110,10 @@ public class RoleController {
         return map;
     }
 
+    @RequestMapping("/queryfenpeirole.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Role> queryFenPeiRole(){
+        return roleService.queryFenPeiRole();
+    }
 }
