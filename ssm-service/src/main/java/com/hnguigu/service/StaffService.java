@@ -26,4 +26,10 @@ public interface StaffService {
 
     //修改
     public int updateStaff(Staff staff);
+
+    //查询员工账号
+    public Staff queryStaffAccount(String staffaccount);
+
+    //登录
+    public Staff loginStaff(Staff staff);
 }

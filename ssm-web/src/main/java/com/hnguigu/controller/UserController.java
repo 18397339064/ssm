@@ -137,8 +137,6 @@ public class UserController {
     @CrossOrigin
     public Map<String,String> addUser1(User user,String zhuceuserpwd2){
         Map<String,String> map=new HashMap<>();
-        System.out.println(user.getUserpwd());
-        System.out.println(zhuceuserpwd2);
 
         if(user.getUserpwd().equals(zhuceuserpwd2)){
             int num=userService.addUser1(user);
@@ -155,6 +153,26 @@ public class UserController {
             map.put("code","2");
         }
 
+
+        return map;
+    }
+
+    //查询用户账号
+    @RequestMapping("/queryuseraccount.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> queryUserAccount(String useraccount){
+        Map<String,String> map=new HashMap<>();
+
+        User u=userService.queryUserAccount(useraccount);
+
+        if(u==null){
+            map.put("msg","账号可用");
+            map.put("code","1");
+        }else{
+            map.put("msg","账号已存在");
+            map.put("code","0");
+        }
 
         return map;
     }

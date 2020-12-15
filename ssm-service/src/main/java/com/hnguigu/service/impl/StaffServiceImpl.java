@@ -61,4 +61,16 @@ public class StaffServiceImpl implements StaffService {
     public int updateStaff(Staff staff) {
         return staffDao.updateStaff(staff);
     }
+
+    //查询员工账号
+    @Override
+    public Staff queryStaffAccount(String staffaccount) {
+        return staffDao.queryStaffAccount(staffaccount);
+    }
+
+    //登录
+    @Override
+    public Staff loginStaff(Staff staff) {
+        return staffDao.loginStaff(staff);
+    }
 }

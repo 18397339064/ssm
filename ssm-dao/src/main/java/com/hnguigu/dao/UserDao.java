@@ -29,4 +29,7 @@ public interface UserDao {
     //前端注册
     public int addUser1(User user);
 
+    //查询用户账号
+    public User queryUserAccount(String useraccount);
+
 }

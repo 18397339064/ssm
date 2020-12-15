@@ -64,4 +64,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addUser1" parameterType="User">
          INSERT INTO USER(useraccount,userpwd) VALUES(#{useraccount},#{userpwd})
   </insert>
+
+	<!-- 查询用户账号 -->
+	<select id="queryUserAccount" parameterType="String" resultType="User">
+
+		  SELECT * FROM USER WHERE useraccount=#{useraccount}
+
+	</select>
 </mapper>

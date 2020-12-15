@@ -1,5 +1,6 @@
 package com.hnguigu.service;
 
+import com.hnguigu.vo.Menu;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.Role;
 
@@ -21,4 +22,7 @@ public interface RoleService {
 
     //删除
     public int deleteRole(int roleid);
+
+    //分配角色插叙
+    public List<Role> queryFenPeiRole();
 }
