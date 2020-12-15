@@ -8,6 +8,8 @@ import com.hnguigu.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -42,4 +44,11 @@ public class CategoryServiceImpl implements CategoryService {
     public int update(Category category) {
         return categoryDao.update(category);
     }
+
+    @Override
+    public List<Category> queryAllCatergory() {
+        return categoryDao.queryAll(new Category());
+    }
+
+
 }
