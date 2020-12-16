@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hnguigu.dao.CommodityDao;
 import com.hnguigu.service.CommodityService;
 import com.hnguigu.vo.Commodity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,4 +120,13 @@ public class CommodityController {
     }
 
 
+    @Autowired
+    CommodityDao commodityDao;
+    @RequestMapping("/queryAllCommodityqq.action")
+    @ResponseBody
+    @CrossOrigin
+    public String querAllCommodityqq(){
+
+        return JSONObject.toJSONString(commodityDao.queryAll(new Commodity()));
+    }
 }

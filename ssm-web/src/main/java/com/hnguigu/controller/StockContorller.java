@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hnguigu.dao.StockDao;
 import com.hnguigu.service.StockService;
 import com.hnguigu.vo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class StockContorller {
     @ResponseBody
     @CrossOrigin
     public String queryAllStock(Stock stock,
-                                @RequestParam("page")int page,
-                                @RequestParam("rows")int rows){
+                                @RequestParam(value = "page",defaultValue = "1")int page,
+                                @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return JSONObject.toJSONString(stockService.queryAll(stock,page,rows));
     }
@@ -42,10 +43,10 @@ public class StockContorller {
 
         if(num!=0){
 
-            return "添加成功";
+            return "添加成功!";
         }
 
-        return "添加失败";
+        return "添加失败!";
     }
 
     @RequestMapping("/deleteStock.action")
@@ -83,9 +84,21 @@ public class StockContorller {
         int num=stockService.update(stock);
 
         if(num!=0){
-            return "添加成功!";
+            return "修改成功!";
         }
 
-        return "添加失败!";
+        return "修改失败!";
+    }
+
+    @Autowired
+    StockDao stockDao;
+
+
+    @RequestMapping("/queryStockId.action")
+    @ResponseBody
+    @CrossOrigin
+    public String queryStockId(int id){
+
+        return JSONObject.toJSONString(stockDao.queryAllId(id));
     }
 }
