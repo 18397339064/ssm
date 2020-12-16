@@ -1,7 +1,9 @@
 package com.hnguigu.controller;
 
+import com.hnguigu.service.ShangHuService;
 import com.hnguigu.service.UserService;
 import com.hnguigu.vo.PageVo;
+import com.hnguigu.vo.ShangHuInfo;
 import com.hnguigu.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ShangHuService shangHuService;
 
 
     //通过条件查询所有
@@ -119,10 +124,10 @@ public class UserController {
         User user1=userService.loginUser(user);
 
         if(user1!=null){
-            //将对象 存入session
-            session.setAttribute("user",user1);
             map.put("msg","登录成功");
             map.put("code","1");
+            map.put("username",user1.getUsername());
+            map.put("usersh",user1.getUsersh().toString());
         }else{
             map.put("msg","登录失败");
             map.put("code","0");
@@ -171,6 +176,42 @@ public class UserController {
             map.put("code","1");
         }else{
             map.put("msg","账号已存在");
+            map.put("code","0");
+        }
+
+        return map;
+    }
+
+    //查询用户名
+    @RequestMapping("/queryusername.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> queryUsername(String username){
+        Map<String,String> map=new HashMap<>();
+
+        User u=userService.queryUsername(username);
+
+        System.out.println(u);
+
+        if(u!=null){
+            ShangHuInfo shangHuInfo=shangHuService.queryuserid(u.getUserid());
+            if(shangHuInfo==null){
+                map.put("msg","该用户可以注册商户");
+                map.put("code","1");
+                map.put("userid",u.getUserid().toString());
+            }else if(shangHuInfo.getShstate().equals("已通过")){
+                map.put("msg","该用户已经是商户，不可重复注册");
+                map.put("code","2");
+            }else if(shangHuInfo.getShstate().equals("已驳回")){
+                map.put("msg","该用户申请注册商户不通过，请重新申请");
+                map.put("code","3");
+            }else if(shangHuInfo.getShstate().equals("未审核")){
+                map.put("msg","该用户待审核中，请稍后。。。");
+                map.put("code","4");
+            }
+
+        }else{
+            map.put("msg","该用户不存在，请先注册");
             map.put("code","0");
         }
 

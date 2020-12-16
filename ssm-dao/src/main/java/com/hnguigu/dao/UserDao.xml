@@ -71,4 +71,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  SELECT * FROM USER WHERE useraccount=#{useraccount}
 
 	</select>
+
+	<!-- 查询用户名 -->
+	<select id="queryUsername" parameterType="String" resultType="User">
+
+		  SELECT * FROM USER WHERE username=#{username}
+
+	</select>
 </mapper>

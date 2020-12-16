@@ -149,15 +149,15 @@ public class StaffController {
     @RequestMapping("/loginstaff.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> loginStaff(Staff staff, HttpSession session){
+    public Map<String,String> loginStaff(Staff staff){
         Map<String,String> map=new HashMap<>();
         Staff staff1=staffService.loginStaff(staff);
 
         if(staff1!=null){
-            //将对象 存入session
-            session.setAttribute("staff",staff1);
             map.put("msg","登录成功");
             map.put("code","1");
+            map.put("staffname",staff1.getStaffname());
+            map.put("staffid",staff1.getStaffid().toString());
         }else{
             map.put("msg","登录失败");
             map.put("code","0");

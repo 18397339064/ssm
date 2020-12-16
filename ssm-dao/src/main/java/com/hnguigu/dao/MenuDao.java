@@ -34,5 +34,8 @@ public interface MenuDao {
     //查询 级数 菜单
     public List<Menu> queryNodeType(int id);
 
+    //通过员工id和父id查询
+    public List<Menu> querymenuBypidandsid(@Param("sid") int sid,
+                                           @Param("pid") int pid);
 
 }

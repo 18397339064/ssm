@@ -31,4 +31,7 @@ public interface UserService {
     //查询用户账号
     public User queryUserAccount(String useraccount);
 
+    //查询用户名
+    public User queryUsername(String username);
+
 }

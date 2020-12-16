@@ -5,15 +5,7 @@ public class ShangHuInfo {
     private String shname;
     private User user = new User();
     private String shaddress;
-    private int shstate;
-
-    public int getShstate() {
-        return shstate;
-    }
-
-    public void setShstate(int shstate) {
-        this.shstate = shstate;
-    }
+    private String shstate;
 
     public int getShid() {
         return shid;
@@ -47,6 +39,15 @@ public class ShangHuInfo {
         this.shaddress = shaddress;
     }
 
+
+
+    public String getShstate() {
+        return shstate;
+    }
+
+    public void setShstate(String shstate) {
+        this.shstate = shstate;
+    }
     @Override
     public String toString() {
         return "ShangHuInfo{" +
@@ -61,7 +62,7 @@ public class ShangHuInfo {
     public ShangHuInfo() {
     }
 
-    public ShangHuInfo(int shid, String shname, User user, String shaddress, int shstate) {
+    public ShangHuInfo(int shid, String shname, User user, String shaddress, String shstate) {
         this.shid = shid;
         this.shname = shname;
         this.user = user;

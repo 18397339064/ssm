@@ -61,16 +61,20 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> queryAllLeftMenu() {
-        //查询出最大的几个父菜单
-        List<Menu> list=menuDao.queryChilder(0);
-       // List<Menu> list2=menuDao.queryChilder(0);
+    public List<Menu> queryAllLeftMenu(int staid) {
 
-        for(Menu s:list){
-           s.setChildMenu(menuDao.queryChilder(s.getId()));
+        //查询所有的父菜单  父节点为0  菜单类型为1
+        List<Menu> menus =menuDao.queryChilder(0);
+
+        //将所有的父菜单的子菜单查询出来，绑定好
+        for (Menu menu:menus) {
+            List<Menu> childsmenu = menuDao.querymenuBypidandsid(staid,menu.getId().intValue());
+            menu.setChildMenu(childsmenu);
+
         }
 
-        return list;
+        return menus;
+
     }
 
     @Override
@@ -85,6 +89,9 @@ public class MenuServiceImpl implements MenuService {
             for(Menu s2:s.getChildren()){
                  s2.setLabel(s2.getName());
                  s2.setChildren(menuDao.queryChilder(s2.getId()));
+                 for(Menu s3:s2.getChildren()){
+                     s3.setLabel(s3.getName());
+                 }
             }
         }
 
