@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.ShoppingCarDao">
+
+	<resultMap id="shoppingCars" type="ShoppingCar">
+		<result column="comid" property="commodity.comid"></result>
+		<result column="comname" property="commodity.comname"></result>
+		<result column="comimg" property="commodity.comimg"></result>
+		<result column="comprice" property="commodity.comprice"></result>
+		<result column="userid" property="user.userid"></result>
+		<result column="username" property="user.username"></result>
+		<result column="userphone" property="user.userphone"></result>
+		<result column="useraddress" property="user.useraddress"></result>
+		<result column="shopcount" property="shopCount"></result>
+	</resultMap>
+
+	<!-- 通过条件查询 -->
+	<select id="selShoppingCar" parameterType="int" resultMap="shoppingCars">
+		SELECT s.*,c.comname,c.comimg,c.comprice,u.username,u.userphone,u.useraddress FROM shoppingcar s
+		left join commodity c on s.comid=c.comid
+		left join user u on s.userid = u.userid
+		where s.userid=#{id} and status = "未购买";
+	</select>
+
+	<!-- 删除 -->
+	<delete id="delShoppingCar" parameterType="int">
+		delete from shoppingcar where shopid=#{id}
+	</delete>
+
+    <!-- 修改 -->
+    <update id="updShoppingCarShu" parameterType="ShoppingCar">
+         UPDATE shoppingcar SET shopcount=#{shopCount} WHERE shopid=#{shopid};
+    </update>
+
+
+	<update id="updShoppingCarZT">
+		 UPDATE shoppingcar SET status=1 WHERE
+		<foreach collection="array" item="shopid" open="shopid in(" separator="," close=");">
+			#{shopid}
+		</foreach>
+	</update>
+</mapper>
