@@ -67,9 +67,16 @@ public class UserServiceImpl implements UserService {
         return userDao.addUser1(user);
     }
 
+    //查询用户账号
     @Override
     public User queryUserAccount(String useraccount) {
         return userDao.queryUserAccount(useraccount);
+    }
+
+    //查询用户名
+    @Override
+    public User queryUsername(String username) {
+        return userDao.queryUsername(username);
     }
 
 

@@ -27,7 +27,7 @@ public interface MenuService {
     public List<Menu> queryByPid();
 
     //查询左边菜单
-    List<Menu> queryAllLeftMenu();
+    List<Menu> queryAllLeftMenu(int sid);
 
     //查询授权菜单
     List<Menu> queryAuthorMenu();

@@ -7,32 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class ShangHuController {
     @Autowired
     ShangHuService shangHuService;
 
-    //查询已审核商户
+    //查询商户
     @RequestMapping(value = "/selShangHu.action")
     @ResponseBody
+    @CrossOrigin
     public PageVo<ShangHuInfo> selShangHu(ShangHuInfo shangHuInfo,
-                                          @RequestParam("page")int page,
-                                          @RequestParam("rows")int rows){
+                                          @RequestParam(value = "page", defaultValue = "1") int page,
+                                          @RequestParam(value = "rows", defaultValue = "10") int rows){
         return shangHuService.selShangHu(shangHuInfo,page,rows);
-    }
-
-    //查询未审核商户
-    @RequestMapping(value = "/selShangHuSheng.action")
-    @ResponseBody
-    public PageVo<ShangHuInfo> selShangHuSheng(ShangHuInfo shangHuInfo,
-                                          @RequestParam("page")int page,
-                                          @RequestParam("rows")int rows){
-        return shangHuService.selShangHuSheng(shangHuInfo,page,rows);
     }
 
     //根据id查询
     @RequestMapping(value = "/selShangHuId.action")
     @ResponseBody
+    @CrossOrigin
     public ShangHuInfo selShangHuId(int id){
         return shangHuService.selShangHuId(id);
     }
@@ -40,6 +36,7 @@ public class ShangHuController {
     //注册商户
     @RequestMapping(value = "/addShangHu.action")
     @ResponseBody
+    @CrossOrigin
     public String addShangHu(ShangHuInfo shangHuInfo){
         int num =  shangHuService.addShangHu(shangHuInfo);
         if(num==1){
@@ -51,6 +48,7 @@ public class ShangHuController {
     //修改商户
     @RequestMapping(value = "/updShangHu.action")
     @ResponseBody
+    @CrossOrigin
     public String updShangHu(ShangHuInfo shangHuInfo){
         int num =  shangHuService.updShangHu(shangHuInfo);
         if(num==1){
@@ -62,46 +60,55 @@ public class ShangHuController {
     //审核成功
     @RequestMapping(value = "/updShangHuYes.action")
     @ResponseBody
-    public String updShangHuYes(){
-        int num =  shangHuService.updShangHuYes();
+    @CrossOrigin
+    public String updShangHuYes(int shid){
+        int num =  shangHuService.updShangHuYes(shid);
         if(num==1){
-            return "已审核";
+            return "已通过";
         }
-        return "修改失败";
+        return "通过失败";
     }
 
     //修改商户
     @RequestMapping(value = "/updShangHuNo.action")
     @ResponseBody
-    public String updShangHuNo(){
-        int num =  shangHuService.updShangHuNo();
+    @CrossOrigin
+    public String updShangHuNo(int shid){
+        int num =  shangHuService.updShangHuNo(shid);
         if(num==1){
             return "已驳回";
         }
-        return "修改失败";
+        return "驳回失败";
     }
 
     //批量删除商户
     //批量删除
-    @RequestMapping(value = "/delShangHuPL.action/{ids}",method = RequestMethod.DELETE)
+    @RequestMapping("/delShangHuPL.action")
     @ResponseBody
-    public boolean deleteShangHuPL(@PathVariable String ids){
+    @CrossOrigin
+    public Map<String,String> deleteShangHuPL(String ids){
+        Map<String,String> map=new HashMap<>();
         String[] idss=ids.split(",");
-        int[] ints=new int[idss.length];
-        for(int i=0;i<idss.length;i++){
-            ints[i]=Integer.parseInt(idss[i]);
+
+        int num=shangHuService.delShangHuPL(idss);
+
+        if(num==idss.length){
+            map.put("msg","删除成功");
+            map.put("code","1");
+        }else{
+            map.put("msg","删除失败");
+            map.put("code","0");
         }
 
-        int num=shangHuService.delShangHuPL(ints);
-
-        return num>0;
+        return map;
     }
 
     //删除商户
     @RequestMapping(value = "/delShangHu.action")
     @ResponseBody
-    public String delShangHu(int id){
-        int num =  shangHuService.delShangHu(id);
+    @CrossOrigin
+    public String delShangHu(int shid){
+        int num =  shangHuService.delShangHu(shid);
         if(num==1){
             return "删除成功";
         }

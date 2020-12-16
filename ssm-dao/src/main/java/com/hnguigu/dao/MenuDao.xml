@@ -79,5 +79,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from menu where nodetype=#{id}
 	</select>
 
-
+	<select id="querymenuBypidandsid"  resultMap="menumap">
+		SELECT DISTINCT m.* FROM menu m
+			INNER JOIN rolemenu rm
+			ON m.id =rm.mid
+			WHERE m.parentid =#{pid}
+			AND rm.rid  IN(
+				SELECT  staffrole.roleid    FROM  staff s INNER JOIN  staffrole ON s.staffid=staffrole.staffid
+				WHERE s.staffid =#{sid}
+			)
+	</select>
 </mapper>
