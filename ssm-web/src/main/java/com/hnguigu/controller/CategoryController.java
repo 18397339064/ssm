@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class CategoryController {
 
@@ -83,5 +85,13 @@ public class CategoryController {
         return "修改失败!";
     }
 
+    //查询所有不带分页
+    @RequestMapping("/queryAllCategoryCom.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Category> queryAllCategoryCom(){
+
+        return categoryService.queryAllCatergory();
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface CommodityDao {
 
 
-    Commodity queryAllId(Commodity commodity);
+    Commodity queryAllId(int id);
 
     List<Commodity> queryAll(Commodity commodity);
 

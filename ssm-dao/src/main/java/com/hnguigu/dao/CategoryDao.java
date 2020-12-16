@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoryDao {
 
 
-    Category queryAllId(Category category);
+    Category queryAllId(int id);
 
     List<Category> queryAll(Category category);
 
