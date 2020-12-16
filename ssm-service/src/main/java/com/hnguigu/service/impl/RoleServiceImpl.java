@@ -63,5 +63,11 @@ public class RoleServiceImpl implements RoleService {
         return list;
     }
 
+    //查询角色名
+    @Override
+    public Role queryRolename(String rolename) {
+        return roleDao.queryRolename(rolename);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.hnguigu.controller;
 import com.hnguigu.service.RoleService;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.Role;
+import com.hnguigu.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -116,4 +117,25 @@ public class RoleController {
     public List<Role> queryFenPeiRole(){
         return roleService.queryFenPeiRole();
     }
+
+    //查询角色名
+    @RequestMapping("/queryrolename.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> queryRolename(String rolename){
+        Map<String,String> map=new HashMap<>();
+
+        Role role=roleService.queryRolename(rolename);
+
+        if(role==null){
+            map.put("msg","角色名可用");
+            map.put("code","1");
+        }else{
+            map.put("msg","角色名已存在");
+            map.put("code","0");
+        }
+
+        return map;
+    }
+
 }
