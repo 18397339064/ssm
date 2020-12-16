@@ -1,5 +1,6 @@
 package com.hnguigu.controller;
 
+import com.hnguigu.dao.WarehouseDao;
 import com.hnguigu.service.WarehouseService;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.Supplier;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -113,4 +115,17 @@ public class WarehouseController {
 
         return map;
     }
+
+    @Autowired
+    WarehouseDao warehouseDao;
+
+
+    @RequestMapping("/queryAllWarehouse.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Warehouse> queryAllWarehouse(){
+
+        return warehouseDao.selWarehouse(new Warehouse());
+    }
+
 }

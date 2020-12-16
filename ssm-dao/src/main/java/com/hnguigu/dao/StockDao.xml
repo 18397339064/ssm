@@ -17,7 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="selectsql">
 		<where>
-			<if test=""></if>
+			<if test="warehouse.whid!=0">whid=#{warehouse.whid}</if>
+			<if test="commodity.comid!=null and commodity.comid!=0">comid=#{commodity.comid}</if>
 		</where>
 	</sql>
 
@@ -30,8 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectsql"></include>
 	</select>
 
-	<select id="queryAllCount" parameterType="Stock" resultMap="BaseMapper">
-		select * from stock
+	<select id="queryAllCount" parameterType="Stock" resultType="int">
+		select count(*) from stock
 		<include refid="selectsql"></include>
 	</select>
 
@@ -44,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<update id="update" parameterType="Stock">
-		update stock set whid=#{wwarehouse.whid},comid=#{commodity.comid},stockcount=#{stockcount}
+		update stock set whid=#{warehouse.whid},comid=#{commodity.comid},stockcount=#{stockcount}
 		where stockid=#{stockid}
 	</update>
 
