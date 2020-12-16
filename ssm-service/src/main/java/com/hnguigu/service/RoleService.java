@@ -25,4 +25,7 @@ public interface RoleService {
 
     //分配角色插叙
     public List<Role> queryFenPeiRole();
+
+    //查询角色名
+    public Role queryRolename(String rolename);
 }
