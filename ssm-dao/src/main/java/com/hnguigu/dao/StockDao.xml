@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.StockDao">
+
+	<resultMap id="BaseMapper" type="Stock">
+		<collection property="warehouse" column="whid" javaType="Warehouse"
+					select="com.hnguigu.dao.WarehouseDao.selWarehouseId"
+		fetchType="lazy"></collection>
+		<collection property="commodity" column="comid" javaType="Commodity"
+					select="com.hnguigu.dao.CommodityDao.queryAllId"
+					fetchType="lazy"></collection>
+	</resultMap>
+
+
+	<sql id="selectsql">
+		<where>
+			<if test=""></if>
+		</where>
+	</sql>
+
+	<select id="queryAllId" parameterType="int" resultMap="BaseMapper">
+		select * from stock where stockid=#{id}
+	</select>
+
+	<select id="queryAll" parameterType="Stock" resultMap="BaseMapper">
+		select * from stock
+		<include refid="selectsql"></include>
+	</select>
+
+	<select id="queryAllCount" parameterType="Stock" resultMap="BaseMapper">
+		select * from stock
+		<include refid="selectsql"></include>
+	</select>
+
+	<insert id="add" parameterType="Stock">
+		insert into stock values(null,#{warehouse.whid},#{commodity.comid},#{stockcount})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from stock where stockid=#{id}
+	</delete>
+
+	<update id="update" parameterType="Stock">
+		update stock set whid=#{wwarehouse.whid},comid=#{commodity.comid},stockcount=#{stockcount}
+		where stockid=#{stockid}
+	</update>
+
+
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.StaffRoleDao">
+
+	<select id="queryAllStaffRole" parameterType="int" resultType="StaffRole">
+		select * from staffrole where staffid=#{staffid}
+	</select>
+
+	<!-- 添加 -->
+	<insert id="addSR" parameterType="StaffRole">
+		INSERT INTO staffrole VALUE(#{srid},#{staffid},#{roleid});
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="deleteStaffid" parameterType="int">
+		DELETE FROM staffrole WHERE staffid=#{staffid};
+	</delete>
+
+</mapper>

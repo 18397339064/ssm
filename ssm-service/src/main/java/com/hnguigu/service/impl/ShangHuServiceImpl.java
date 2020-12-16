@@ -29,15 +29,6 @@ public class ShangHuServiceImpl  implements ShangHuService {
         return pageVo;
     }
 
-    @Override
-    public PageVo<ShangHuInfo> selShangHuSheng(ShangHuInfo shangHuInfo, int page, int rows) {
-        PageVo<ShangHuInfo> pageVo = new PageVo<>();
-        PageHelper.startPage(page,rows);
-        pageVo.setRows(shangHuDao.selShangHuSheng(shangHuInfo));
-        pageVo.setTotal(shangHuDao.selShangHuShengCount(shangHuInfo));
-        return pageVo;
-    }
-
     //根据id查询
     @Override
     public ShangHuInfo selShangHuId(int id) {
@@ -50,22 +41,28 @@ public class ShangHuServiceImpl  implements ShangHuService {
     }
 
     @Override
-    public int updShangHuYes() {
-        return shangHuDao.updShangHuYes();
+    public int updShangHuYes(int shid) {
+        return shangHuDao.updShangHuYes(shid);
     }
 
     @Override
-    public int updShangHuNo() {
-        return shangHuDao.updShangHuNo();
+    public int updShangHuNo(int shid) {
+        return shangHuDao.updShangHuNo(shid);
     }
 
     @Override
-    public int delShangHu(int id) {
-        return shangHuDao.delShangHu(id);
+    public int delShangHu(int shid) {
+        return shangHuDao.delShangHu(shid);
     }
 
     @Override
-    public int delShangHuPL(int[] id) {
+    public int delShangHuPL(String[] id) {
         return shangHuDao.delShangHuPL(id);
+    }
+
+    //通过用户id查询
+    @Override
+    public ShangHuInfo queryuserid(int userid) {
+        return shangHuDao.queryuserid(userid);
     }
 }

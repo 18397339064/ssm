@@ -8,6 +8,8 @@ import com.hnguigu.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -63,6 +65,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public int addUser1(User user) {
         return userDao.addUser1(user);
+    }
+
+    //查询用户账号
+    @Override
+    public User queryUserAccount(String useraccount) {
+        return userDao.queryUserAccount(useraccount);
+    }
+
+    //查询用户名
+    @Override
+    public User queryUsername(String username) {
+        return userDao.queryUsername(username);
     }
 
 

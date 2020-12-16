@@ -42,7 +42,7 @@ public class CommodityController {
                                HttpServletRequest request) throws IOException {
 
         //获取上下文对象
-        String path=request.getServletContext().getRealPath("/img");
+      /*  String path=request.getServletContext().getRealPath("/img");
 
         String fileName=fileImg.getOriginalFilename();
 
@@ -50,10 +50,10 @@ public class CommodityController {
 
         if(!file.exists()){
             file.mkdirs();
-        }
-        fileImg.transferTo(new File(path,fileName));
+        }*/
+        fileImg.transferTo(new File("D:\\S3项目\\day04\\vue\\img\\"+fileImg.getOriginalFilename()));
 
-        commodity.setComimg("img/"+fileName);
+        commodity.setComimg("img/"+fileImg.getOriginalFilename());
         commodity.getCategory().setCtid(ctid);
 
         int num=commodityService.add(commodity);
@@ -95,7 +95,7 @@ public class CommodityController {
 
 
         //获取上下文对象
-        String path=request.getServletContext().getRealPath("/img");
+/*        String path=request.getServletContext().getRealPath("/img");
 
         String fileName=fileImg.getOriginalFilename();
 
@@ -103,10 +103,10 @@ public class CommodityController {
 
         if(!file.exists()){
             file.mkdirs();
-        }
-        fileImg.transferTo(new File(path,fileName));
+        }*/
+        fileImg.transferTo(new File("D:\\S3项目\\day04\\vue\\img\\"+fileImg.getOriginalFilename()));
 
-        commodity.setComimg("img/"+fileName);
+        commodity.setComimg("img/"+fileImg.getOriginalFilename());
         commodity.getCategory().setCtid(ctid);
 
         int num=commodityService.update(commodity);

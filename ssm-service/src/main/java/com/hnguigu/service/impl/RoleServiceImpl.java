@@ -53,4 +53,15 @@ public class RoleServiceImpl implements RoleService {
         return roleDao.deleteRole(roleid);
     }
 
+    @Override
+    public List<Role> queryFenPeiRole() {
+        List<Role> list=roleDao.queryRole(new Role());
+        for (Role r:list) {
+            r.setId(r.getRoleid());
+            r.setLabel(r.getRolename());
+        }
+        return list;
+    }
+
+
 }
