@@ -126,7 +126,12 @@ public class UserController {
         if(user1!=null){
             map.put("msg","登录成功");
             map.put("code","1");
+            map.put("userid",user1.getUserid().toString());
+            map.put("useraccount",user1.getUseraccount());
+            map.put("userpwd",user1.getUserpwd());
             map.put("username",user1.getUsername());
+            map.put("usersex",user1.getUsersex());
+            map.put("userphone",user1.getUserphone());
             map.put("usersh",user1.getUsersh().toString());
         }else{
             map.put("msg","登录失败");
