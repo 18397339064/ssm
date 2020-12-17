@@ -16,4 +16,10 @@ public interface StockService {
 
     int update(Stock stock);
 
+    //修改数量（增加）
+    public int updateCountJia(Stock stock);
+
+    //查询该商品在库存中是否存在
+    public Stock queryCom(int comid);
+
 }

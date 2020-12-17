@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectsql">
 		<where>
 			<if test="warehouse.whid!=0">whid=#{warehouse.whid}</if>
-			<if test="commodity.comid!=null and commodity.comid!=0">comid=#{commodity.comid}</if>
+			<if test="commodity.category.ctid!=null and commodity.category.ctid!=0">category.ctid=#{commodity.category.ctid}</if>
 		</where>
 	</sql>
 
@@ -27,12 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="queryAll" parameterType="Stock" resultMap="BaseMapper">
-		select * from stock
+		SELECT * FROM stock INNER JOIN commodity ON stock.comid=commodity.comid
+		INNER JOIN category ON commodity.ctid=category.ctid
 		<include refid="selectsql"></include>
 	</select>
 
 	<select id="queryAllCount" parameterType="Stock" resultType="int">
-		select count(*) from stock
+		SELECT count(*) FROM stock INNER JOIN commodity ON stock.comid=commodity.comid
+		INNER JOIN category ON commodity.ctid=category.ctid
 		<include refid="selectsql"></include>
 	</select>
 
@@ -45,10 +47,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<update id="update" parameterType="Stock">
-		update stock set whid=#{warehouse.whid},comid=#{commodity.comid},stockcount=#{stockcount}
+		update stock set stockcount=#{stockcount}
 		where stockid=#{stockid}
 	</update>
 
+	<!--修改数量（增加）-->
+	<update id="updateCountJia" parameterType="Stock">
+		update stock set stockcount=stockcount+#{stockcount}
+		where comid=#{commodity.comid}
+	</update>
 
-
+	<!--查询该商品在库存中是否存在-->
+	<select id="queryCom" parameterType="int" resultMap="BaseMapper">
+		SELECT * FROM stock WHERE comid=#{commodity.comid};
+	</select>
 </mapper>

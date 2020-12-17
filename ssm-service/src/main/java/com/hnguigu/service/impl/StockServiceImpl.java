@@ -42,4 +42,16 @@ public class StockServiceImpl implements StockService {
     public int update(Stock stock) {
         return stockDao.update(stock);
     }
+
+    //修改数量（增加）
+    @Override
+    public int updateCountJia(Stock stock) {
+        return stockDao.updateCountJia(stock);
+    }
+
+    //查询该商品在库存中是否存在
+    @Override
+    public Stock queryCom(int comid) {
+        return stockDao.queryCom(comid);
+    }
 }
