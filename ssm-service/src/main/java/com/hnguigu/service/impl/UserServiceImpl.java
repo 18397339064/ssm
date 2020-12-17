@@ -79,5 +79,11 @@ public class UserServiceImpl implements UserService {
         return userDao.queryUsername(username);
     }
 
+    //把用户修改为商户
+    @Override
+    public int updateSH(int userid) {
+        return userDao.updateSH(userid);
+    }
+
 
 }

@@ -222,4 +222,24 @@ public class UserController {
 
         return map;
     }
+
+    //修改
+    @RequestMapping("/updatesh.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> updateSH(int userid){
+        Map<String,String> map=new HashMap<>();
+
+        int num=userService.updateSH(userid);
+
+        if(num==1){
+            map.put("msg","修改成功");
+            map.put("code","1");
+        }else{
+            map.put("msg","修改失败");
+            map.put("code","0");
+        }
+
+        return map;
+    }
 }

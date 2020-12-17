@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 通过条件查询 -->
 	<select id="selShoppingCar" parameterType="int" resultMap="shoppingCars">
-		SELECT s.*,c.comname,c.comimg,c.comprice,u.username,u.userphone,u.useraddress FROM shoppingcar s
+		SELECT s.*,c.comname,c.comimg,c.comprice,u.username,u.userphone FROM shoppingcar s
 		left join commodity c on s.comid=c.comid
 		left join user u on s.userid = u.userid
 		where s.userid=#{id} and status = "未购买";

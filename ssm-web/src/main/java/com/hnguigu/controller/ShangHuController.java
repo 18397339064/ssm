@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.hnguigu.service.ShangHuService;
+import com.hnguigu.service.UserService;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.ShangHuInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.Map;
 public class ShangHuController {
     @Autowired
     ShangHuService shangHuService;
+
+    @Autowired
+    UserService userService;
 
     //查询商户
     @RequestMapping(value = "/selShangHu.action")
@@ -61,9 +65,11 @@ public class ShangHuController {
     @RequestMapping(value = "/updShangHuYes.action")
     @ResponseBody
     @CrossOrigin
-    public String updShangHuYes(int shid){
+    public String updShangHuYes(@RequestParam(value = "shid") int shid,
+                                @RequestParam(value = "userid") int userid){
         int num =  shangHuService.updShangHuYes(shid);
         if(num==1){
+            userService.updateSH(userid);
             return "已通过";
         }
         return "通过失败";

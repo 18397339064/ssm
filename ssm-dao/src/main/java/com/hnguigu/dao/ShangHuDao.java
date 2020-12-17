@@ -34,4 +34,5 @@ public interface ShangHuDao {
 
     //通过用户id查询
     public ShangHuInfo queryuserid(int userid);
+
 }
