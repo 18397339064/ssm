@@ -1,5 +1,6 @@
 package com.hnguigu.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class Orders {
     private Commodity commodity;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date ordertime;
     private Integer ordercount;
     private Integer userid;
