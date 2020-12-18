@@ -61,4 +61,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryCom" parameterType="int" resultMap="BaseMapper">
 		SELECT * FROM stock WHERE comid=#{commodity.comid};
 	</select>
+
+	<!-- 判断是否有某个商品在库存中有，如果有不能删除-->
+	<select id="queryStockComid" parameterType="int" resultType="int">
+       SELECT COUNT(*) FROM stock WHERE comid=#{commodity.comid};
+    </select>
 </mapper>

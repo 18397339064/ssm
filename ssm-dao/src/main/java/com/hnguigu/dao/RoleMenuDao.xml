@@ -19,4 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM rolemenu WHERE rid=#{roleid};
 	</delete>
 
+	<!-- 判断是否有某个菜单被角色引用，如果有不能删除 -->
+	<select id="queryRMMid" parameterType="int" resultType="int">
+       SELECT COUNT(*) FROM rolemenu WHERE mid=#{mid};
+    </select>
 </mapper>

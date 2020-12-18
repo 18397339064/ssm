@@ -52,4 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		comnum=#{comnum}
 		where comid=#{comid}
 	</update>
+
+
+	<select id="queryNoCom" parameterType="int" resultMap="BaseMapper">
+		 SELECT * FROM commodity WHERE comid  NOT IN(SELECT comid FROM supcom WHERE supid=#{supplier.supid});
+	</select>
 </mapper>

@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Orders {
 
-    private Integer orderid;
+    private String orderid;
     private Integer comid;
     private Commodity commodity;
 
@@ -20,11 +20,11 @@ public class Orders {
     private Float totalmoney;
     private String orderstate;
 
-    public Integer getOrderid() {
+    public String getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(Integer orderid) {
+    public void setOrderid(String orderid) {
         this.orderid = orderid;
     }
 
@@ -111,7 +111,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Integer orderid, Integer comid, Date ordertime, Integer ordercount, Integer userid, Integer shid, Float totalmoney, String orderstate) {
+    public Orders(String orderid, Integer comid, Date ordertime, Integer ordercount, Integer userid, Integer shid, Float totalmoney, String orderstate) {
         this.orderid = orderid;
         this.comid = comid;
         this.ordertime = ordertime;
