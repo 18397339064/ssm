@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		<association property="shangHuInfo" javaType="ShangHuInfo" column="shid" fetchType="lazy">
 			<result column="shid" property="shid"></result>
+			<result column="shname" property="shname"></result>
 			<result column="shaddress" property="shaddress"></result>
 		</association>
 	</resultMap>
