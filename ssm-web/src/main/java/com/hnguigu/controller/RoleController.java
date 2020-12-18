@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.hnguigu.service.RoleService;
+import com.hnguigu.service.StaffRoleService;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.Role;
 import com.hnguigu.vo.User;
@@ -17,6 +18,9 @@ public class RoleController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    StaffRoleService staffRoleService;
 
     //通过条件查询所有
     @RequestMapping("/queryrolecount.action")
@@ -77,17 +81,31 @@ public class RoleController {
         System.out.println(ids);
 
         String[] idss=ids.split(",");
+        int[] ints=new int[idss.length];
 
-        int num=roleService.deletePLRole(idss);
+        int count=0;
+        for(int i=0;i<idss.length;i++) {
+            ints[i] = Integer.parseInt(idss[i]);
 
-        if(num==idss.length){
-            map.put("msg","删除成功");
-            map.put("code","1");
-        }else{
-            map.put("msg","删除失败");
-            map.put("code","0");
+            //判断该角色是否被某些用户引用，如果有不能删除，给出提示信息
+            count = staffRoleService.querySRRoleid(ints[i]);
         }
 
+        if(count>0){
+            map.put("msg","对不起，其中有角色已被引用，不能删除");
+            map.put("code","2");
+        }else {
+            int num=roleService.deletePLRole(idss);
+
+            if(num==idss.length){
+                map.put("msg","删除成功");
+                map.put("code","1");
+            }else{
+                map.put("msg","删除失败");
+                map.put("code","0");
+            }
+
+        }
         return map;
     }
 
@@ -98,16 +116,23 @@ public class RoleController {
     public Map<String,String> deleteRole(int roleid){
         Map<String,String> map=new HashMap<>();
 
-        int num=roleService.deleteRole(roleid);
+        //判断该角色是否被某些用户引用，如果有不能删除，给出提示信息
+        int count=staffRoleService.querySRRoleid(roleid);
 
-        if(num==1){
-            map.put("msg","删除成功");
-            map.put("code","1");
-        }else{
-            map.put("msg","删除失败");
-            map.put("code","0");
+        if(count>0){
+            map.put("msg","对不起，该角色已被引用，不能删除");
+            map.put("code","2");
+        }else {
+            int num=roleService.deleteRole(roleid);
+
+            if(num==1){
+                map.put("msg","删除成功");
+                map.put("code","1");
+            }else{
+                map.put("msg","删除失败");
+                map.put("code","0");
+            }
         }
-
         return map;
     }
 

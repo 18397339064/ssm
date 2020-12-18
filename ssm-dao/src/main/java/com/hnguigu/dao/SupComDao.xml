@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
+<mapper namespace="com.hnguigu.dao.SupComDao">
+
+	<resultMap id="BaseMapper" type="SupCom">
+		<collection property="supplier" column="supid" javaType="Supplier"
+					select="com.hnguigu.dao.SupplierDao.selSupplierId"
+		fetchType="lazy"></collection>
+		<collection property="commodity" column="comid" javaType="Commodity"
+					select="com.hnguigu.dao.CommodityDao.queryAllId"
+					fetchType="lazy"></collection>
+	</resultMap>
+
+	<select id="selSupCom" parameterType="SupCom" resultMap="BaseMapper">
+		SELECT * FROM supcom INNER JOIN commodity ON supcom.comid=commodity.comid
+		<where>
+			<if test="supplier.supid!=null and supplier.supid!=''">supid=#{supplier.supid}</if>
+		</where>
+	</select>
+
+	<select id="selSupComCount" parameterType="SupCom" resultType="int">
+		SELECT count(*) FROM supcom INNER JOIN commodity ON supcom.comid=commodity.comid
+		<where>
+			<if test="supplier.supid!=null and supplier.supid!=''">supid=#{supplier.supid}</if>
+		</where>
+	</select>
+
+	<insert id="addSupCom" parameterType="SupCom">
+		insert into supcom values(null,#{commodity.comid},#{supplier.supid},#{jinprice})
+	</insert>
+
+	<!-- 修改 -->
+	<update id="updSupCom" parameterType="SupCom">
+         UPDATE supcom SET jinprice=#{jinprice} WHERE supcomid=#{supcomid};
+    </update>
+
+	<!-- 批量删除 -->
+	<delete id="delSupComPL">
+		delete from supcom where
+		<foreach collection="array" item="supcomid" open="supcomid in(" separator="," close=");">
+			#{supcomid}
+		</foreach>
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delSupCom" parameterType="int">
+		delete from supcom where supcomid=#{supcomid}
+	</delete>
+
+	<!--查询该供应商里面有哪些商品-->
+	<select id="queryCom" parameterType="SupCom" resultMap="BaseMapper">
+		 SELECT * FROM  supcom WHERE supid=#{supplier.supid}
+	</select>
+
+
+	<!--查询供应商里面没有哪些商品-->
+
+
+</mapper>
