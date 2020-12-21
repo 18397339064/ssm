@@ -31,4 +31,10 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     public int deleteRoleid(int roleid) {
         return roleMenuDao.deleteRoleid(roleid);
     }
+
+    //判断是否有某个菜单被角色引用，如果有不能删除
+    @Override
+    public int queryRMMid(int mid) {
+        return roleMenuDao.queryRMMid(mid);
+    }
 }

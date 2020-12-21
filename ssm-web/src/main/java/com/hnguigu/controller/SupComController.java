@@ -1,10 +1,8 @@
 package com.hnguigu.controller;
 
-import com.hnguigu.dao.WarehouseDao;
-import com.hnguigu.service.WarehouseService;
-import com.hnguigu.vo.PageVo;
-import com.hnguigu.vo.Supplier;
-import com.hnguigu.vo.Warehouse;
+import com.alibaba.fastjson.JSONObject;
+import com.hnguigu.service.SupComService;
+import com.hnguigu.vo.SupCom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,39 +11,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
-public class WarehouseController {
+public class SupComController {
+
     @Autowired
-    WarehouseService warehouseService;
+    SupComService supComService;
 
-    //查询仓库
-    @RequestMapping("/selWarehouse.action")
+    //查询
+    @RequestMapping("/selsupcom.action")
     @ResponseBody
     @CrossOrigin
-    public PageVo<Warehouse> selWarehouse(Warehouse warehouse,
-                                          @RequestParam(value = "page",defaultValue = "1")int page,
-                                          @RequestParam(value = "rows",defaultValue = "10")int rows){
-        return warehouseService.selWarehouse(warehouse,page,rows);
+    public String selSupCom(SupCom supCom,
+                            @RequestParam(value = "page",defaultValue = "1")int page,
+                            @RequestParam(value = "rows",defaultValue = "10")int rows){
+
+        return JSONObject.toJSONString(supComService.selSupCom(supCom,page,rows));
     }
 
-    //根据仓库id查询仓库
-    @RequestMapping("/selWarehouseID.action")
+    //添加
+    @RequestMapping("/addsupcom.action")
     @ResponseBody
     @CrossOrigin
-    public Warehouse selWarehouseID(int whid){
-        return warehouseService.selWarehouseId(whid);
-    }
-
-    //添加仓库
-    @RequestMapping("/addWarehouse.action")
-    @ResponseBody
-    @CrossOrigin
-    public Map<String,String> addWarehouse(Warehouse warehouse){
+    public Map<String,String> addSupCom(SupCom supCom){
         Map<String,String> map=new HashMap<>();
-        int num=warehouseService.addWarehouse(warehouse);
+        int num=supComService.addSupCom(supCom);
 
         if(num==1){
             map.put("msg","添加成功");
@@ -57,13 +48,13 @@ public class WarehouseController {
         return map;
     }
 
-    //修改仓库
-    @RequestMapping("/updWarehouse.action")
+    //修改
+    @RequestMapping("/updsupcom.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> updWarehouse(Warehouse warehouse){
+    public Map<String,String> updSupCom(SupCom supCom){
         Map<String,String> map=new HashMap<>();
-        int num=warehouseService.updWarehouse(warehouse);
+        int num=supComService.updSupCom(supCom);
 
         if(num==1){
             map.put("msg","修改成功");
@@ -75,13 +66,13 @@ public class WarehouseController {
         return map;
     }
 
-    //删除仓库
-    @RequestMapping("/delWarehouse.action")
+    //删除
+    @RequestMapping("/delsupcom.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> delWarehouse(int whid){
+    public Map<String,String> delSupCom(int supcomid){
         Map<String,String> map=new HashMap<>();
-        int num=warehouseService.delWarehouse(whid);
+        int num=supComService.delSupCom(supcomid);
 
         if(num==1){
             map.put("msg","删除成功");
@@ -94,16 +85,16 @@ public class WarehouseController {
     }
 
     //批量删除
-    @RequestMapping("/delWarehousePL.action")
+    @RequestMapping("/delsupcompl.action")
     @ResponseBody
     @CrossOrigin
-    public Map<String,String> delWarehousePL(String ids){
+    public Map<String,String> delSupComPL(String ids){
         Map<String,String> map=new HashMap<>();
         System.out.println(ids);
 
         String[] idss=ids.split(",");
 
-        int num=warehouseService.delWarehousePL(idss);
+        int num=supComService.delSupComPL(idss);
 
         if(num==idss.length){
             map.put("msg","删除成功");
@@ -116,16 +107,12 @@ public class WarehouseController {
         return map;
     }
 
-    @Autowired
-    WarehouseDao warehouseDao;
-
-
-    @RequestMapping("/queryAllWarehouse.action")
+    //查询
+    @RequestMapping(value = "/querynocom.action",produces = "text/json;charset=utf-8")
     @ResponseBody
     @CrossOrigin
-    public List<Warehouse> queryAllWarehouse(){
+    public String queryNoCom(int supid){
 
-        return warehouseDao.selWarehouse(new Warehouse());
+        return JSONObject.toJSONString(supComService.queryNoCom(supid));
     }
-
 }

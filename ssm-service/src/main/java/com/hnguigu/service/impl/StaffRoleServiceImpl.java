@@ -31,4 +31,10 @@ public class StaffRoleServiceImpl implements StaffRoleService {
     public int deleteStaffid(int staffid) {
         return staffRoleDao.deleteStaffid(staffid);
     }
+
+    //判断该角色是否被某些员工引用，如果有不能删除，给出提示信息
+    @Override
+    public int querySRRoleid(int roleid) {
+        return staffRoleDao.querySRRoleid(roleid);
+    }
 }

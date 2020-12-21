@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hnguigu.dao.StockDao;
 import com.hnguigu.service.StockService;
 import com.hnguigu.vo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class StockContorller {
     @ResponseBody
     @CrossOrigin
     public String queryAllStock(Stock stock,
-                                @RequestParam("page")int page,
-                                @RequestParam("rows")int rows){
+                                @RequestParam(value = "page",defaultValue = "1")int page,
+                                @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return JSONObject.toJSONString(stockService.queryAll(stock,page,rows));
     }
@@ -31,21 +32,20 @@ public class StockContorller {
     @RequestMapping("addStock.action")
     @ResponseBody
     @CrossOrigin
-    public String addStock(Stock stock,
-                           @RequestParam("whid")int whid,
-                           @RequestParam("comid")int comid){
+    public String addStock(Stock stock){
 
-        stock.getWarehouse().setWhid(whid);
+        Stock stock1=stockService.queryCom(stock.getCommodity().getComid());
 
-        stock.getCommodity().setComid(comid);
-        int num=stockService.add(stock);
-
-        if(num!=0){
-
-            return "添加成功";
+        if(stock1!=null){
+            Stock stock2=new Stock();
+            stock2.getCommodity().setComid(stock.getCommodity().getComid());
+            stock2.setStockcount(stock.getStockcount());
+            stockService.updateCountJia(stock2);
+        }else{
+            stockService.add(stock);
         }
 
-        return "添加失败";
+        return "添加成功!";
     }
 
     @RequestMapping("/deleteStock.action")
@@ -73,19 +73,25 @@ public class StockContorller {
     @RequestMapping("/updateStock.action")
     @ResponseBody
     @CrossOrigin
-    public String updateStock(Stock stock,
-                              @RequestParam("whid")int whid,
-                              @RequestParam("comid")int comid){
-
-        stock.getWarehouse().setWhid(whid);
-
-        stock.getCommodity().setComid(comid);
+    public String updateStock(Stock stock){
         int num=stockService.update(stock);
 
         if(num!=0){
-            return "添加成功!";
+            return "修改成功!";
         }
 
-        return "添加失败!";
+        return "修改失败!";
+    }
+
+    @Autowired
+    StockDao stockDao;
+
+
+    @RequestMapping("/queryStockId.action")
+    @ResponseBody
+    @CrossOrigin
+    public String queryStockId(int id){
+
+        return JSONObject.toJSONString(stockDao.queryAllId(id));
     }
 }

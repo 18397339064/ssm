@@ -48,4 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteRole" parameterType="int">
 		delete from role where roleid=#{roleid}
 	</delete>
+
+	<!-- 查询角色名-->
+	<select id="queryRolename" parameterType="String" resultType="Role">
+
+		  SELECT * FROM role WHERE rolename=#{rolename}
+
+	</select>
 </mapper>

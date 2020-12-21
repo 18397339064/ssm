@@ -126,7 +126,12 @@ public class UserController {
         if(user1!=null){
             map.put("msg","登录成功");
             map.put("code","1");
+            map.put("userid",user1.getUserid().toString());
+            map.put("useraccount",user1.getUseraccount());
+            map.put("userpwd",user1.getUserpwd());
             map.put("username",user1.getUsername());
+            map.put("usersex",user1.getUsersex());
+            map.put("userphone",user1.getUserphone());
             map.put("usersh",user1.getUsersh().toString());
         }else{
             map.put("msg","登录失败");
@@ -212,6 +217,26 @@ public class UserController {
 
         }else{
             map.put("msg","该用户不存在，请先注册");
+            map.put("code","0");
+        }
+
+        return map;
+    }
+
+    //修改
+    @RequestMapping("/updatesh.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map<String,String> updateSH(int userid){
+        Map<String,String> map=new HashMap<>();
+
+        int num=userService.updateSH(userid);
+
+        if(num==1){
+            map.put("msg","修改成功");
+            map.put("code","1");
+        }else{
+            map.put("msg","修改失败");
             map.put("code","0");
         }
 

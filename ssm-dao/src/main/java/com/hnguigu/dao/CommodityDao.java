@@ -22,5 +22,6 @@ public interface CommodityDao {
 
     int update(Commodity commodity);
 
-
+    //查询供应商里面没有哪些商品
+    public List<Commodity> queryNoCom(int supid);
 }

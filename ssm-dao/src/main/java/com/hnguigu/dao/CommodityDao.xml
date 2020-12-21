@@ -6,17 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hnguigu.dao.CommodityDao">
 
 
-	<sql id="selectSql">
-		<where>
-			<if test="comname!=null">comname like concat('%',#{comname},'%')</if>
-		</where>
-	</sql>
-
 	<resultMap id="BaseMapper" type="Commodity">
 		<collection property="category" column="ctid" javaType="Category"
 					select="com.hnguigu.dao.CategoryDao.queryAllId"
-		    		fetchType="lazy"></collection>
+					fetchType="lazy"></collection>
 	</resultMap>
+
+
+	<sql id="selectSql">
+		<where>
+			<if test="comname!=null">comname like concat('%',#{comname},'%')</if>
+			<if test="category.ctid!=null">and category.ctid=#{category.ctid}</if>
+		</where>
+	</sql>
+
 	
 	
 	<select id="queryAllId" parameterType="int" resultMap="BaseMapper">
@@ -25,12 +28,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="queryAll" parameterType="Commodity" resultMap="BaseMapper">
-		select * from commodity
+		SELECT * FROM commodity INNER JOIN category ON commodity.ctid=category.ctid
 		<include refid="selectSql"></include>
 	</select>
 
 	<select id="queryAllCount" parameterType="Commodity" resultType="int">
-		select count(*) from commodity
+		SELECT count(*) FROM commodity INNER JOIN category ON commodity.ctid=category.ctid
 		<include refid="selectSql"></include>
 	</select>
 
@@ -54,4 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		comnum=#{comnum}
 		where comid=#{comid}
 	</update>
+
+
+	<select id="queryNoCom" parameterType="int" resultMap="BaseMapper">
+		 SELECT * FROM commodity WHERE comid  NOT IN(SELECT comid FROM supcom WHERE supid=#{supplier.supid});
+	</select>
 </mapper>

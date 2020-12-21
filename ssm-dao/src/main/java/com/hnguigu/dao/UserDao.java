@@ -34,4 +34,7 @@ public interface UserDao {
 
     //查询用户名
     public User queryUsername(String username);
+
+    //把用户修改为商户
+    public int updateSH(int userid);
 }

@@ -2,6 +2,7 @@ package com.hnguigu.dao;
 
 
 import com.hnguigu.vo.Role;
+import com.hnguigu.vo.User;
 
 import java.util.List;
 
@@ -24,5 +25,8 @@ public interface RoleDao {
 
     //删除
     public int deleteRole(int roleid);
+
+    //查询角色名
+    public Role queryRolename(String rolename);
 
 }

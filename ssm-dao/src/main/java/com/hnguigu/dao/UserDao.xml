@@ -78,4 +78,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  SELECT * FROM USER WHERE username=#{username}
 
 	</select>
+
+	<!-- 把用户修改为商户 -->
+	<update id="updateSH" parameterType="int">
+			UPDATE USER SET usersh=1 WHERE userid=#{userid};
+    </update>
 </mapper>
