@@ -31,6 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> querAll2() {
+        return categoryDao.queryAll2();
+    }
+
+    @Override
     public int add(Category category) {
         return categoryDao.add(category);
     }

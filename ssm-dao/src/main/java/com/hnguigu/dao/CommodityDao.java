@@ -12,6 +12,8 @@ public interface CommodityDao {
 
     List<Commodity> queryAll(Commodity commodity);
 
+    List<Commodity> queryRand(int id);
+
     int queryAllCount(Commodity commodity);
 
     int add(Commodity commodity);

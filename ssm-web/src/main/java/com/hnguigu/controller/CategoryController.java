@@ -1,5 +1,6 @@
 package com.hnguigu.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hnguigu.service.CategoryService;
 import com.hnguigu.vo.Category;
 import com.hnguigu.vo.Commodity;
@@ -21,7 +22,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     //条件查询加分页
-    @RequestMapping("/queryAllCategory.action")
+    @RequestMapping(value = "/queryAllCategory.action")
     @ResponseBody
     @CrossOrigin
     public PageVo queryAllCategory(Category category,
@@ -29,6 +30,13 @@ public class CategoryController {
                                    @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return categoryService.queryAll(category,page,rows);
+    }
+
+    @RequestMapping(value = "/queryAll2.action",produces = "text/json;charset=utf-8" )
+    @ResponseBody
+    @CrossOrigin
+    public String queryAll2(){
+        return JSONObject.toJSONString(categoryService.querAll2());
     }
 
 

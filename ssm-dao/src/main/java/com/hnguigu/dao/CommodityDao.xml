@@ -34,6 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectSql"></include>
 	</select>
 
+	<select id="queryRand" parameterType="int" resultType="Commodity">
+		SELECT * FROM commodity WHERE ctid=#{id} ORDER BY RAND() LIMIT 0,6
+	</select>
+
+
 	<insert id="add" parameterType="Commodity" >
 		insert into commodity values(null,#{comname},#{category.ctid},#{comimg},
 		#{comprice},#{comsperifications},#{complace},#{comnum})

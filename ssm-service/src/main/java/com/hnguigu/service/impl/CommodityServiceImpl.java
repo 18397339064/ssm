@@ -11,6 +11,8 @@ import com.hnguigu.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommodityServiceImpl implements CommodityService {
 
@@ -28,6 +30,11 @@ public class CommodityServiceImpl implements CommodityService {
         pageVo.setTotal(commodityDao.queryAllCount(commodity));
 
         return pageVo;
+    }
+
+    @Override
+    public List<Commodity> queryRand(int id) {
+        return commodityDao.queryRand(id);
     }
 
     @Override
