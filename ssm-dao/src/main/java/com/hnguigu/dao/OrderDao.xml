@@ -54,4 +54,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
+	<select id="queryChuKuTotalByMonth" parameterType="String" resultType="TongJi">
+        SELECT category.`ctname` AS `type`,COUNT(*) AS num FROM `orders`
+        INNER JOIN commodity ON `orders`.`comid`=commodity.`comid`
+        INNER JOIN category ON commodity.`ctid`=category.`ctid`
+        WHERE ordertime LIKE CONCAT('2020-',#{month},'%')
+        GROUP BY category.`ctname`
+    </select>
+
+	<select id="queryRevenueByMonth" parameterType="String" resultType="TongJi">
+    SELECT category.`ctname` AS `type`,SUM(orders.`totalmoney`) AS num FROM `orders`
+        INNER JOIN commodity ON `orders`.`comid`=commodity.`comid`
+        INNER JOIN category ON commodity.`ctid`=category.`ctid`
+       WHERE ordertime LIKE CONCAT('2020-',#{month},'%')
+        AND `orders`.`orderstate`='已完成'
+          GROUP BY category.`ctname`
+    </select>
 </mapper>

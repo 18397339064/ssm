@@ -5,8 +5,11 @@ import com.hnguigu.dao.OrderDao;
 import com.hnguigu.service.OrderService;
 import com.hnguigu.vo.Orders;
 import com.hnguigu.vo.PageVo;
+import com.hnguigu.vo.TongJi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -24,5 +27,17 @@ public class OrderServiceImpl implements OrderService {
         pageVo.setTotal(orderDao.queryOrderCount(orders));
 
         return pageVo;
+    }
+
+    //根据月份查询商品出库统计
+    @Override
+    public List<TongJi> queryChuKuTotalByMonth(String month) {
+        return orderDao.queryChuKuTotalByMonth(month);
+    }
+
+    //根据月份查询商品营收统计
+    @Override
+    public List<TongJi> queryRevenueByMonth(String month) {
+        return orderDao.queryRevenueByMonth(month);
     }
 }

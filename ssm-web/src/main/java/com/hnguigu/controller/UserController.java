@@ -133,6 +133,12 @@ public class UserController {
             map.put("usersex",user1.getUsersex());
             map.put("userphone",user1.getUserphone());
             map.put("usersh",user1.getUsersh().toString());
+
+            ShangHuInfo shangHuInfo=shangHuService.queryuserid(user1.getUserid());
+            map.put("shid",shangHuInfo.getShid()+"");
+            map.put("shname",shangHuInfo.getShname());
+            map.put("shaddress",shangHuInfo.getShaddress());
+
         }else{
             map.put("msg","登录失败");
             map.put("code","0");
