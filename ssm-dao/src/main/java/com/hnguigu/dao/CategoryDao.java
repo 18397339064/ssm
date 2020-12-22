@@ -11,6 +11,8 @@ public interface CategoryDao {
 
     List<Category> queryAll(Category category);
 
+    List<Category> queryAll2();
+
     int queryAllCount(Category category);
 
     int add(Category category);

@@ -13,7 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="userid" property="user.userid"></result>
 		<result column="username" property="user.username"></result>
 		<result column="userphone" property="user.userphone"></result>
-		<result column="useraddress" property="user.useraddress"></result>
 		<result column="shopcount" property="shopCount"></result>
 	</resultMap>
 

@@ -1,5 +1,8 @@
 package com.hnguigu.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
 
    /* 8、商品分类表名：category
@@ -8,7 +11,15 @@ public class Category {
     private Integer ctid;
     private String ctname;
     private String ctimg;
+    private List<Commodity> commodity = new ArrayList<Commodity>();
 
+
+    public Category(Integer ctid, String ctname, String ctimg, List<Commodity> commodity) {
+        this.ctid = ctid;
+        this.ctname = ctname;
+        this.ctimg = ctimg;
+        this.commodity = commodity;
+    }
 
     public Category(Integer ctid, String ctname, String ctimg) {
         this.ctid = ctid;
@@ -41,5 +52,13 @@ public class Category {
 
     public void setCtimg(String ctimg) {
         this.ctimg = ctimg;
+    }
+
+    public List<Commodity> getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(List<Commodity> commodity) {
+        this.commodity = commodity;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class CommodityController {
@@ -31,6 +32,13 @@ public class CommodityController {
                                     @RequestParam(value = "rows",defaultValue = "10")int rows){
 
         return JSONObject.toJSONString(commodityService.queryAll(commodity,page,rows));
+    }
+
+    @RequestMapping(value = "/queryRand.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryRand(int id){
+        return JSONObject.toJSONString(commodityService.queryRand(id));
     }
 
 
