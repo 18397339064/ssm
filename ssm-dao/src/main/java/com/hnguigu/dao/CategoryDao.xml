@@ -17,11 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<resultMap id="categorys2" type="Category">
-		<result column="comid" property="commodity.comid"></result>
-		<result column="comname" property="commodity.comname"></result>
-		<result column="comimg" property="commodity.comimg"></result>
-
-		<collection property="commodity" javaType="list" ofType="Commodity"
+		<id property="ctid" column="ctid"></id>
+		<collection property="commodity" javaType="List" ofType="Commodity"
 		column="ctid" select="com.hnguigu.dao.CommodityDao.queryRand" fetchType="lazy"
 		></collection>
 
@@ -39,7 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="queryAll2" parameterType="Category" resultMap="categorys2">
 		select * from category
-		<include refid="selectSql"></include>
 	</select>
 
 	<select id="queryAllCount" parameterType="Category" resultType="int">
