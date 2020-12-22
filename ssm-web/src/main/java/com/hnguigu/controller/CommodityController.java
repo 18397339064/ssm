@@ -29,7 +29,7 @@ public class CommodityController {
     StockService stockService;
 
 
-    @RequestMapping("/queryAllCommodity.action")
+    @RequestMapping(value = "/queryAllCommodity.action",produces = "text/json;charset=utf-8")
     @ResponseBody
     @CrossOrigin
     public String queryAllCommodity(Commodity commodity,
