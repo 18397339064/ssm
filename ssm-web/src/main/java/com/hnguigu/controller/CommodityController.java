@@ -3,6 +3,7 @@ package com.hnguigu.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.hnguigu.dao.CommodityDao;
 import com.hnguigu.service.CommodityService;
+import com.hnguigu.service.StockService;
 import com.hnguigu.vo.Commodity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class CommodityController {
 
     @Autowired
     CommodityService commodityService;
+
+    @Autowired
+    StockService stockService;
 
 
     @RequestMapping(value = "/queryAllCommodity.action",produces = "text/json;charset=utf-8")
@@ -52,7 +58,7 @@ public class CommodityController {
         if(!file.exists()){
             file.mkdirs();
         }*/
-        fileImg.transferTo(new File("D:\\S3项目\\day04\\vue\\img\\"+fileImg.getOriginalFilename()));
+        fileImg.transferTo(new File("E:\\S3\\XiangMu4\\vue\\img\\"+fileImg.getOriginalFilename()));
 
         commodity.setComimg("img/"+fileImg.getOriginalFilename());
         commodity.getCategory().setCtid(ctid);
@@ -71,19 +77,36 @@ public class CommodityController {
     @RequestMapping("/deleteCommodity.action")
     @ResponseBody
     @CrossOrigin
-        public String deleteCommodity(String id){
+        public Map<String,String> deleteCommodity(String id){
+
+        Map<String,String> map=new HashMap<>();
 
         String[] ids=id.split(",");
 
         int num=0;
-        for (int i=0;i<ids.length;i++){
-           num+=commodityService.delete(Integer.parseInt(ids[i]));
-        }
 
-        if(num!=0){
-            return "删除成功!";
+        int count=0;
+
+        for (int i=0;i<ids.length;i++){
+            //判断是否有某个商品在库存中有，如果有不能删除
+            count = stockService.queryStockComid(Integer.parseInt(ids[i]));
         }
-        return "删除失败!";
+        if(count>0){
+            map.put("msg","对不起，库存中有该商品，不能删除");
+            map.put("code","2");
+        }else{
+            for (int i=0;i<ids.length;i++) {
+                num += commodityService.delete(Integer.parseInt(ids[i]));
+            }
+            if(num!=0){
+                map.put("msg","删除成功");
+                map.put("code","1");
+            }else{
+                map.put("msg","删除失败");
+                map.put("code","0");
+            }
+        }
+        return map;
     }
 
     @RequestMapping("/updateCommodity.action")
@@ -105,7 +128,7 @@ public class CommodityController {
         if(!file.exists()){
             file.mkdirs();
         }*/
-        fileImg.transferTo(new File("D:\\S3项目\\day04\\vue\\img\\"+fileImg.getOriginalFilename()));
+        fileImg.transferTo(new File("E:\\S3\\XiangMu4\\vue\\img\\"+fileImg.getOriginalFilename()));
 
         commodity.setComimg("img/"+fileImg.getOriginalFilename());
         commodity.getCategory().setCtid(ctid);

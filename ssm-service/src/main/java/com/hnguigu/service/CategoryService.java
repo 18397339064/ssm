@@ -10,6 +10,8 @@ public interface CategoryService {
 
     PageVo<Category> queryAll(Category category,int page,int rows);
 
+    List<Category> querAll2();
+
     int add(Category category);
 
     int delete(int id);

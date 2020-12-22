@@ -9,6 +9,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectSql">
 		<where><if test="ctname!=null">ctname like concat('%',#{ctname},'%')</if></where>
 	</sql>
+	
+	<resultMap id="categorys" type="Category">
+		<result column="comid" property="commodity.comid"></result>
+		<result column="comname" property="commodity.comname"></result>
+		<result column="comimg" property="commodity.comimg"></result>
+	</resultMap>
+
+	<resultMap id="categorys2" type="Category">
+		<result column="comid" property="commodity.comid"></result>
+		<result column="comname" property="commodity.comname"></result>
+		<result column="comimg" property="commodity.comimg"></result>
+
+		<collection property="commodity" javaType="list" ofType="Commodity"
+		column="ctid" select="com.hnguigu.dao.CommodityDao.queryRand" fetchType="lazy"
+		></collection>
+
+	</resultMap>
 
 	<select id="queryAllId" parameterType="int" resultType="Category">
 		select * from category where ctid=#{id}
@@ -20,10 +37,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectSql"></include>
 	</select>
 
+	<select id="queryAll2" parameterType="Category" resultMap="categorys2">
+		select * from category
+		<include refid="selectSql"></include>
+	</select>
+
 	<select id="queryAllCount" parameterType="Category" resultType="int">
 		select count(*) from category
 		<include refid="selectSql"></include>
 	</select>
+
 
 	<insert id="add" parameterType="Category" >
 		insert into category values(null,#{ctname},#{ctimg})
