@@ -24,4 +24,9 @@ public interface OrderService {
      * @return
      */
     public List<TongJi> queryRevenueByMonth(String month);
+
+    /**
+     * 订单审核出库
+     */
+    public int updateOrder(Orders orders);
 }

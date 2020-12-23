@@ -66,4 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryStockComid" parameterType="int" resultType="int">
        SELECT COUNT(*) FROM stock WHERE comid=#{commodity.comid};
     </select>
+
+	<update id="janStock" parameterType="Stock">
+	 update stock stockcount-=#{stockcount} where comid=#{commodity.comid}
+	</update>
+
 </mapper>

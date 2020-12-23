@@ -40,4 +40,9 @@ public class OrderServiceImpl implements OrderService {
     public List<TongJi> queryRevenueByMonth(String month) {
         return orderDao.queryRevenueByMonth(month);
     }
+
+    @Override
+    public int updateOrder(Orders orders) {
+        return orderDao.updateOrder(orders);
+    }
 }
