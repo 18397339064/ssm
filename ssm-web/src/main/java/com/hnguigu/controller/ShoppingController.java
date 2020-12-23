@@ -24,21 +24,35 @@ public class ShoppingController {
         return shoppingCarService.selShoppingCar(userid);
     }
 
+    @RequestMapping("/addShoppingCar.action")
+    @ResponseBody
+    @CrossOrigin
+    public String addShoppingCar(@RequestParam("userid")int userid,
+                                 @RequestParam("comid")int comid,
+                                 ShoppingCar shoppingCar){
+        shoppingCar.getCommodity().setComid(comid);
+        shoppingCar.getUser().setUserid(userid);
+        ShoppingCar shoppingCar1 = new ShoppingCar();
+        shoppingCar1 = shoppingCarService.selShoppingCarId(shoppingCar);
+        int num = 0;
+        if(shoppingCar1==null) {
+            num = shoppingCarService.addShoppingCar(shoppingCar);
+        }else{
+            shoppingCar.setShopid(shoppingCar1.getShopid());
+            num = shoppingCarService.updShoppingCarXT(shoppingCar);
+        }
+        if(num==1){
+            return "添加成功";
+        }
+        return "添加失败";
+    }
+
     @RequestMapping("/updShoppingCarShu.action")
     @ResponseBody
     @CrossOrigin
-    public String updShoppingCarShu(String num1,String num2){
-
-        String[] shopid=num1.split(",");
-        String[] shopCount=num2.split(",");
-        ShoppingCar shoppingCar = new ShoppingCar();
-        int num=0;
-        for(int i=0;i<shopid.length;i++){
-            shoppingCar.setShopid(Integer.valueOf(shopid[i]));
-            shoppingCar.setShopCount(Integer.valueOf(shopCount[i]));
-            num=num+shoppingCarService.updShoppingCarShu(shoppingCar);
-        }
-        if(num==shopid.length){
+    public String updShoppingCarShu(ShoppingCar shoppingCar){
+        int num = shoppingCarService.updShoppingCarShu(shoppingCar);
+        if(num==1){
             return "修改数量成功";
         }
         return "修改数量失败";
