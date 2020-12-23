@@ -58,7 +58,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!--查询供应商里面没有哪些商品-->
-
-
 </mapper>

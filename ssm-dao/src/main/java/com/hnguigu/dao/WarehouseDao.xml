@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="category" column="ctid" javaType="Category"
 					select="com.hnguigu.dao.CategoryDao.queryAllId"
 		fetchType="lazy"></collection>
+
+		<collection property="commodity" column="comid" javaType="Commodity"
+					select="com.hnguigu.dao.CommodityDao.queryAllId"
+					fetchType="lazy"></collection>
 	</resultMap>
 
 
@@ -63,4 +67,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updWarehouse" parameterType="Warehouse">
          UPDATE warehouse SET whname=#{whname},whaddress=#{whaddress},ctid=#{category.ctid} WHERE supid=#{supid};
     </update>
+
+	<!-- 查询该商品是什么类型，放入哪个仓库-->
+	<select id="queryComCt" parameterType="int" resultMap="wareHouses">
+
+		SELECT * FROM warehouse INNER JOIN category ON warehouse.ctid=category.ctid
+		INNER JOIN commodity ON category.ctid=commodity.ctid
+		WHERE commodity.comid=#{category.commodity.comid}
+	</select>
 </mapper>

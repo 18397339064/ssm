@@ -1,5 +1,8 @@
 package com.hnguigu.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value="handler")
 public class Commodity {
 
    /* 7、商品表名:commodity
@@ -92,5 +95,19 @@ public class Commodity {
 
     public void setComnum(Integer comnum) {
         this.comnum = comnum;
+    }
+
+    @Override
+    public String toString() {
+        return "Commodity{" +
+                "comid=" + comid +
+                ", comname='" + comname + '\'' +
+                ", category=" + category +
+                ", comimg='" + comimg + '\'' +
+                ", comprice=" + comprice +
+                ", comsperifications='" + comsperifications + '\'' +
+                ", complace='" + complace + '\'' +
+                ", comnum=" + comnum +
+                '}';
     }
 }

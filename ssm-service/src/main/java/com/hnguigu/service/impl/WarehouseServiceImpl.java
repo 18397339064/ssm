@@ -52,4 +52,10 @@ public class WarehouseServiceImpl implements WarehouseService {
     public int delWarehousePL(String[] id) {
         return warehouseDao.delWarehousePL(id);
     }
+
+    //查询该商品是什么类型，放入哪个仓库
+    @Override
+    public Warehouse queryComCt(int comid) {
+        return warehouseDao.queryComCt(comid);
+    }
 }

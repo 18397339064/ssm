@@ -2,9 +2,10 @@ package com.hnguigu.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
-
+@JsonIgnoreProperties(value="handler")
 public class Purchase {
 
     private Integer purid;         //采购编号	Int	10	主键，自增

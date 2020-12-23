@@ -75,7 +75,7 @@ public class ShangHuController {
         return "通过失败";
     }
 
-    //修改商户
+    //审核失败
     @RequestMapping(value = "/updShangHuNo.action")
     @ResponseBody
     @CrossOrigin

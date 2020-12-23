@@ -23,4 +23,7 @@ public interface WarehouseService {
 
     //批量删除仓库
     public int delWarehousePL(String[] id);
+
+    //查询该商品是什么类型，放入哪个仓库
+    public Warehouse queryComCt(int comid);
 }

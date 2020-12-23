@@ -8,6 +8,7 @@ public class Warehouse {
     private String whname;
     private String whaddress;
     private Category category = new Category();
+    private Commodity commodity=new Commodity();
 
     public int getWhid() {
         return whid;
@@ -41,6 +42,14 @@ public class Warehouse {
         this.category = category;
     }
 
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
+    }
+
     @Override
     public String toString() {
         return "Warehouse{" +
@@ -48,6 +57,7 @@ public class Warehouse {
                 ", whname='" + whname + '\'' +
                 ", whaddress='" + whaddress + '\'' +
                 ", category=" + category +
+                ", commodity=" + commodity +
                 '}';
     }
 

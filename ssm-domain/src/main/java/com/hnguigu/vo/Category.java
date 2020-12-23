@@ -61,4 +61,14 @@ public class Category {
     public void setCommodity(List<Commodity> commodity) {
         this.commodity = commodity;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "ctid=" + ctid +
+                ", ctname='" + ctname + '\'' +
+                ", ctimg='" + ctimg + '\'' +
+                ", commodity=" + commodity +
+                '}';
+    }
 }

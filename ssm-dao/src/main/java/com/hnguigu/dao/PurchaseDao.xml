@@ -5,6 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名 -->
 <mapper namespace="com.hnguigu.dao.PurchaseDao">
 
+    <resultMap id="BaseMapper" type="Purchase">
+        <collection property="supplier" column="supid" javaType="Supplier"
+                    select="com.hnguigu.dao.SupplierDao.selSupplierId"
+                    fetchType="lazy"></collection>
+        <collection property="commodity" column="comid" javaType="Commodity"
+                    select="com.hnguigu.dao.CommodityDao.queryAllId"
+                    fetchType="lazy"></collection>
+        <collection property="staff" column="staffid" javaType="Staff"
+                    select="com.hnguigu.dao.StaffDao.queryByStaid"
+                    fetchType="lazy"></collection>
+    </resultMap>
+
 
     <insert id="addPurchase" parameterType="Purchase" >
         insert into purchase
@@ -12,4 +24,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{purcount},#{staff.staffid},#{purtime},#{purstate},#{purjinprice},#{purzonprice})
     </insert>
 
+
+    <!-- 查询 -->
+    <select id="queryPur" resultMap="BaseMapper">
+
+        SELECT * FROM purchase
+
+    </select>
+
+    <!-- 查询数量 -->
+    <select id="queryPurCount" resultType="int">
+
+        SELECT count(*) FROM purchase
+
+    </select>
+
+    <!-- 修改审核状态（通过） -->
+    <update id="updPurYes" parameterType="int">
+         UPDATE purchase SET purstate='已通过' WHERE purid=#{purid};
+    </update>
+
+    <!-- 修改审核状态（驳回） -->
+    <update id="updPurNo" parameterType="int">
+         UPDATE purchase SET purstate='已驳回' WHERE purid=#{purid};
+    </update>
 </mapper>
