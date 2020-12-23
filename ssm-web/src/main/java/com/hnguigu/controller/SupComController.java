@@ -27,6 +27,7 @@ public class SupComController {
                             @RequestParam(value = "page",defaultValue = "1")int page,
                             @RequestParam(value = "rows",defaultValue = "10")int rows){
 
+        System.out.println(supCom.getCommodity().getComid());
         return JSONObject.toJSONString(supComService.selSupCom(supCom,page,rows));
     }
 
