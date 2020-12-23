@@ -18,6 +18,21 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
     }
 
     @Override
+    public ShoppingCar selShoppingCarId(ShoppingCar shoppingCar) {
+        return shoppingCarDao.selSoppingCarId(shoppingCar);
+    }
+
+    @Override
+    public int updShoppingCarXT(ShoppingCar shoppingCar) {
+        return shoppingCarDao.updShoppingCarXT(shoppingCar);
+    }
+
+    @Override
+    public int addShoppingCar(ShoppingCar shoppingCar) {
+        return shoppingCarDao.addShoppingCar(shoppingCar);
+    }
+
+    @Override
     public int updShoppingCarShu(ShoppingCar shoppingCar) {
         return shoppingCarDao.updShoppingCarShu(shoppingCar);
     }

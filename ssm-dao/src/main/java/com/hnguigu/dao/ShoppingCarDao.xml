@@ -24,6 +24,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where s.userid=#{id} and status = "未购买";
 	</select>
 
+	<select id="selSoppingCarId" parameterType="ShoppingCar" resultMap="shoppingCars">
+		SELECT s.*,c.comname,c.comimg,c.comprice,u.username,u.userphone FROM shoppingcar s
+		left join commodity c on s.comid=c.comid
+		left join user u on s.userid = u.userid
+		where s.userid=#{user.userid} and s.comid = #{commodity.comid};
+	</select>
+
+	<insert id="addShoppingCar" parameterType="ShoppingCar">
+		insert into shoppingcar values(null,#{commodity.comid},#{user.userid},#{shopCount},"未购买")
+	</insert>
+
 	<!-- 删除 -->
 	<delete id="delShoppingCar" parameterType="int">
 		delete from shoppingcar where shopid=#{id}
@@ -34,6 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          UPDATE shoppingcar SET shopcount=#{shopCount} WHERE shopid=#{shopid};
     </update>
 
+	<update id="updShoppingCarXT" parameterType="ShoppingCar">
+         UPDATE shoppingcar SET shopcount=shopcount+#{shopCount} WHERE shopid=#{shopid};
+    </update>
 
 	<update id="updShoppingCarZT">
 		 UPDATE shoppingcar SET status=1 WHERE

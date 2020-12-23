@@ -37,6 +37,10 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityDao.queryRand(id);
     }
 
+    public Commodity queryById(int id){
+        return commodityDao.queryAllId(id);
+    }
+
     @Override
     public int add(Commodity commodity) {
         return commodityDao.add(commodity);

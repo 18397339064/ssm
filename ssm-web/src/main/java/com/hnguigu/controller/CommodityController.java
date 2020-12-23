@@ -1,6 +1,7 @@
 package com.hnguigu.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.hnguigu.dao.CommodityDao;
 import com.hnguigu.service.CommodityService;
 import com.hnguigu.vo.Commodity;
@@ -41,6 +42,13 @@ public class CommodityController {
         return JSONObject.toJSONString(commodityService.queryRand(id));
     }
 
+    @RequestMapping(value = "/queryById.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryById(int id){
+            return JSONObject.toJSONString(commodityService.queryById(id));
+    }
+
 
     @RequestMapping("/addCommodity.action")
     @ResponseBody
@@ -49,6 +57,7 @@ public class CommodityController {
                                @RequestParam(value = "fileImg") MultipartFile fileImg,
                                @RequestParam(value = "ctid")int ctid,
                                HttpServletRequest request) throws IOException {
+
 
         //获取上下文对象
       /*  String path=request.getServletContext().getRealPath("/img");

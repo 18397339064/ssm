@@ -9,18 +9,18 @@ public class Orders {
 
     private String orderid;
     private Integer comid;
-    private Commodity commodity;
+    private Commodity commodity = new Commodity();
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date ordertime;
     private Integer ordercount;
     private Integer userid;
-    private User user;
+    private User user = new User();
     private Integer shid;
     private ShangHuInfo shangHuInfo;
     private Float totalmoney;
-    private String orderstate;
+    private int orderstate;
 
     public String getOrderid() {
         return orderid;
@@ -78,11 +78,11 @@ public class Orders {
         this.totalmoney = totalmoney;
     }
 
-    public String getOrderstate() {
+    public int getOrderstate() {
         return orderstate;
     }
 
-    public void setOrderstate(String orderstate) {
+    public void setOrderstate(int orderstate) {
         this.orderstate = orderstate;
     }
 
@@ -113,21 +113,24 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(String orderid, Integer comid, Date ordertime, Integer ordercount, Integer userid, Integer shid, Float totalmoney, String orderstate) {
+    public Orders(String orderid, Integer comid, Commodity commodity, Date ordertime, Integer ordercount, Integer userid, User user, Integer shid, ShangHuInfo shangHuInfo, Float totalmoney, int orderstate) {
         this.orderid = orderid;
         this.comid = comid;
+        this.commodity = commodity;
         this.ordertime = ordertime;
         this.ordercount = ordercount;
         this.userid = userid;
+        this.user = user;
         this.shid = shid;
+        this.shangHuInfo = shangHuInfo;
         this.totalmoney = totalmoney;
         this.orderstate = orderstate;
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "orderid=" + orderid +
+        return "Orders{" +
+                "orderid='" + orderid + '\'' +
                 ", comid=" + comid +
                 ", commodity=" + commodity +
                 ", ordertime=" + ordertime +
@@ -137,7 +140,7 @@ public class Orders {
                 ", shid=" + shid +
                 ", shangHuInfo=" + shangHuInfo +
                 ", totalmoney=" + totalmoney +
-                ", orderstate='" + orderstate + '\'' +
+                ", orderstate=" + orderstate +
                 '}';
     }
 }

@@ -11,6 +11,8 @@ public interface CommodityService {
     PageVo<Commodity> queryAll(Commodity commodity,int page,int rows);
 
     List<Commodity> queryRand(int id);
+    
+    Commodity queryById(int id);
 
     int add(Commodity commodity);
 

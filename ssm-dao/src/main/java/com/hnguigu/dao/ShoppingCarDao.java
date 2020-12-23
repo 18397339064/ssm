@@ -8,6 +8,15 @@ public interface ShoppingCarDao{
     //根据用户id查询该用户所有的商品
     public List<ShoppingCar> selShoppingCar(int id);
 
+    //查询该商品是否相同
+    public ShoppingCar selSoppingCarId(ShoppingCar shoppingCar);
+
+    //商品相同相加
+    public int updShoppingCarXT(ShoppingCar shoppingCar);
+
+    //加入购物车
+    public int addShoppingCar(ShoppingCar shoppingCar);
+
     //根据用户id修改数量
     public int updShoppingCarShu(ShoppingCar shoppingCar);
 
