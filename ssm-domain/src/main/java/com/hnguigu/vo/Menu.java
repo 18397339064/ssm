@@ -66,6 +66,15 @@ public class Menu {
     private boolean checked;
 
     List<Menu> children;
+    private boolean disabled=true;
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
 
     public String getLabel() {
         return label;

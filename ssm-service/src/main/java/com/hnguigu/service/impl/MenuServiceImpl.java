@@ -72,32 +72,66 @@ public class MenuServiceImpl implements MenuService {
             menu.setChildMenu(childsmenu);
 
         }
-
         return menus;
-
     }
 
+
     @Override
-    public List<Menu> queryAuthorMenu() {
+    public List<Menu> queryAuthorMenu(int staid) {
         //查询出顶级菜单
         List<Menu> list=menuDao.queryNodeType(1);
+        List<Menu> staM=menuDao.querymenuBypidandsid(staid,0);
 
         for(Menu s:list){
             s.setLabel(s.getName());
+            //设置所有的子菜单权限 二级菜单
             s.setChildren(menuDao.queryChilder(s.getId()));
 
+            //获取当前这个菜单的 员工权限1
+            List<Menu> staMenu=menuDao.querymenuBypidandsid(staid,s.getId().intValue());
+
+            ////循环判断 把禁用改为false此为1一级
+            for(Menu st:staM){
+                if(s.getId()==st.getId()){
+                    s.setDisabled(false);
+                }
+            }
             for(Menu s2:s.getChildren()){
-                 s2.setLabel(s2.getName());
-                 s2.setChildren(menuDao.queryChilder(s2.getId()));
-                 for(Menu s3:s2.getChildren()){
+                //获取当前这个菜单的 员工权限2
+                List<Menu> staMenu2=menuDao.querymenuBypidandsid(staid,s2.getId().intValue());
+
+                //设置当前这个菜单的所有子菜单 三级菜单
+                s2.setChildren(menuDao.queryChilder(s2.getId()));
+
+                //设置标签名
+                s2.setLabel(s2.getName());
+                 //循环判断 把禁用改为false此为二级
+                for(Menu sta:staMenu){
+                    if(s2.getId()==sta.getId()){
+                        s2.setDisabled(false);
+                    }
+                }
+
+                //设置二级菜单的子菜单（三级菜单）
+                for(Menu s3:s2.getChildren()){
+
+                    //设置标签名
                      s3.setLabel(s3.getName());
+                     //循环判断 把禁用改为false此为三级
+                     for(Menu sta2:staMenu2){
+                         if(s3.getId()==sta2.getId()){
+                             s3.setDisabled(false);
+                         }
+                     }
                  }
             }
         }
-
-
-
         return list;
+    }
+
+    @Override
+    public List<Menu> queryStaffAuthorMenu(int staid) {
+        return null;
     }
 
 

@@ -30,7 +30,9 @@ public interface MenuService {
     List<Menu> queryAllLeftMenu(int sid);
 
     //查询授权菜单
-    List<Menu> queryAuthorMenu();
+    List<Menu> queryAuthorMenu(int staid);
 
+    //综合 二合一
+    List<Menu> queryStaffAuthorMenu(int staid);
 
 }
