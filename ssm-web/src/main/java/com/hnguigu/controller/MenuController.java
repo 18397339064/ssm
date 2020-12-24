@@ -159,8 +159,8 @@ public class MenuController {
     @RequestMapping("/queryAuthorMenu.action")
     @ResponseBody
     @CrossOrigin
-    public List<Menu> queryAuthorMenu(){
+    public List<Menu> queryAuthorMenu(int staid){
 
-        return menuService.queryAuthorMenu();
+        return menuService.queryAuthorMenu(staid);
     }
 }
