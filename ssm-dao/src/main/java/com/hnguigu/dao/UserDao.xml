@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 修改 -->
     <update id="updateUser" parameterType="User">
-       UPDATE user SET userpwd=#{userpwd},username=#{username},userphone=#{userphone} WHERE userid=#{userid};
+       UPDATE user SET userpwd=#{userpwd},username=#{username},usersex=#{usersex},userphone=#{userphone} WHERE userid=#{userid};
     </update>
 
 	<!-- 登录 -->
