@@ -28,4 +28,7 @@ public interface StockDao {
     //判断是否有某个商品在库存中有，如果有不能删除
     public int queryStockComid(int comid);
 
+    //审核出库成功  减少库存
+    int janStock();
+
 }

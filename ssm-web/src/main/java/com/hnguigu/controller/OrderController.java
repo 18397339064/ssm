@@ -46,4 +46,19 @@ public class OrderController {
         return orderService.queryRevenueByMonth(month);
     }
 
+
+    //修改订单状态
+    @RequestMapping("/updateOrderState.action")
+    @ResponseBody
+    @CrossOrigin
+    public String updateOrderState(Orders orders){
+
+        int num=orderService.updateOrder(orders);
+
+        if(num!=0){
+            return "审核成功!";
+        }
+
+        return "审核失败!";
+    }
 }

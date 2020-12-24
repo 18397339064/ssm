@@ -70,4 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND `orders`.`orderstate`='已完成'
           GROUP BY category.`ctname`
     </select>
+
+	<update id="updateOrder" parameterType="Orders">
+		update orders set orderstate=#{orderstate} where orderid=#{orderid}
+	</update>
 </mapper>
