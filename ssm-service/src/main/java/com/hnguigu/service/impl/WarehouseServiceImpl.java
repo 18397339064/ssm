@@ -8,6 +8,8 @@ import com.hnguigu.vo.Warehouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WarehouseServiceImpl implements WarehouseService {
     @Autowired
@@ -55,7 +57,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     //查询该商品是什么类型，放入哪个仓库
     @Override
-    public Warehouse queryComCt(int comid) {
+    public List<Warehouse> queryComCt(int comid) {
         return warehouseDao.queryComCt(comid);
     }
 }

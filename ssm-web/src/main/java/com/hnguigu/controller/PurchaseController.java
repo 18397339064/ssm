@@ -66,13 +66,10 @@ public class PurchaseController {
     @ResponseBody
     @CrossOrigin
     public String updPurYes(@RequestParam(value = "purid") int purid,
+                            @RequestParam(value = "whid") int whid,
                             @RequestParam(value = "comid") int comid,
                             @RequestParam(value = "purcount") int purcount){
 
-        /*Warehouse warehouse=warehouseService.queryComCt(comid);
-        System.out.println(warehouse);
-
-        System.out.println("purid:"+purid+",comid:"+comid+",purcount:"+purcount);*/
         int num =  purchaseService.updPurYes(purid);
         if(num==1){
             //加到库存里面
@@ -85,9 +82,8 @@ public class PurchaseController {
                 stockService.updateCountJia(stock2);
             }else{
                 //查询该商品是什么类型，放入哪个仓库
-                Warehouse warehouse=warehouseService.queryComCt(comid);
                 Stock stock1=new Stock();
-                stock1.getWarehouse().setWhid(warehouse.getWhid());
+                stock1.getWarehouse().setWhid(whid);
                 stock1.getCommodity().setComid(comid);
                 stock1.setStockcount(purcount);
                 stockService.add(stock1);

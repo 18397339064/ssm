@@ -25,5 +25,5 @@ public interface WarehouseService {
     public int delWarehousePL(String[] id);
 
     //查询该商品是什么类型，放入哪个仓库
-    public Warehouse queryComCt(int comid);
+    public List<Warehouse> queryComCt(int comid);
 }

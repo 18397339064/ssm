@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加 -->
 	<insert id="addWarehouse" parameterType="Warehouse">
-		INSERT INTO  warehouse value(null,#{whname},#{whaddress},#{category.ctid})
+		INSERT INTO  warehouse value(null,#{whname},#{whaddress},#{category.ctid},0)
   </insert>
 
 
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 修改 -->
     <update id="updWarehouse" parameterType="Warehouse">
-         UPDATE warehouse SET whname=#{whname},whaddress=#{whaddress},ctid=#{category.ctid} WHERE supid=#{supid};
+         UPDATE warehouse SET whname=#{whname},whaddress=#{whaddress},ctid=#{category.ctid} WHERE whid=#{whid};
     </update>
 
 	<!-- 查询该商品是什么类型，放入哪个仓库-->

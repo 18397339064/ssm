@@ -9,6 +9,7 @@ public class Warehouse {
     private String whaddress;
     private Category category = new Category();
     private Commodity commodity=new Commodity();
+    private Integer capacity;
 
     public int getWhid() {
         return whid;
@@ -50,6 +51,26 @@ public class Warehouse {
         this.commodity = commodity;
     }
 
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Warehouse(int whid, String whname, String whaddress, Category category, Commodity commodity, Integer capacity) {
+        this.whid = whid;
+        this.whname = whname;
+        this.whaddress = whaddress;
+        this.category = category;
+        this.commodity = commodity;
+        this.capacity = capacity;
+    }
+
+    public Warehouse() {
+    }
+
     @Override
     public String toString() {
         return "Warehouse{" +
@@ -58,16 +79,7 @@ public class Warehouse {
                 ", whaddress='" + whaddress + '\'' +
                 ", category=" + category +
                 ", commodity=" + commodity +
+                ", capacity=" + capacity +
                 '}';
-    }
-
-    public Warehouse() {
-    }
-
-    public Warehouse(int whid, String whname, String whaddress, Category category) {
-        this.whid = whid;
-        this.whname = whname;
-        this.whaddress = whaddress;
-        this.category = category;
     }
 }

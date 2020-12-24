@@ -128,4 +128,13 @@ public class WarehouseController {
         return warehouseDao.selWarehouse(new Warehouse());
     }
 
+    //查询该商品是什么类型，放入哪个仓库
+    @RequestMapping("/querycomct.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Warehouse> queryComCt(int comid){
+
+        return warehouseDao.queryComCt(comid);
+    }
+
 }
