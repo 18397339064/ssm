@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 前端注册 -->
 	<insert id="addUser1" parameterType="User">
-         INSERT INTO USER(useraccount,userpwd) VALUES(#{useraccount},#{userpwd})
+         INSERT INTO USER(useraccount,userpwd,usersh) VALUES(#{useraccount},#{userpwd},0)
   </insert>
 
 	<!-- 查询用户账号 -->
