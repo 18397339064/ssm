@@ -25,8 +25,18 @@ public interface OrderService {
      */
     public List<TongJi> queryRevenueByMonth(String month);
 
-    /**
-     * 订单审核出库
-     */
-    public int updateOrder(Orders orders);
+    //用户通过条件查询
+    public PageVo<Orders> queryUserOrderCount(Orders order, int page, int rows);
+
+    //修改状态（确定收货）
+    public int updOrder4(Orders orders);
+
+    //删除订单(未付款)
+    public int delOrder(Orders orders);
+
+    //删除订单(待发货)
+    public int delOrder1(Orders orders);
+
+    //删除订单（已发货）
+    public int delOrder2(Orders orders);
 }
