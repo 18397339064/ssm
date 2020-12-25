@@ -72,4 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 update stock stockcount-=#{stockcount} where comid=#{commodity.comid}
 	</update>
 
+	<!--查询商品的库存数量-->
+	<select id="queryStockCount" parameterType="int" resultType="int">
+		SELECT SUM(stockcount) FROM stock WHERE comid=#{commodity.comid}
+	</select>
+
 </mapper>

@@ -25,4 +25,7 @@ public interface StockService {
     //判断是否有某个商品在库存中有，如果有不能删除
     public int queryStockComid(int comid);
 
+    //查询商品的库存数量
+    public int queryStockCount(int comid);
+
 }

@@ -28,6 +28,12 @@ public interface OrderService {
     //用户通过条件查询
     public PageVo<Orders> queryUserOrderCount(Orders order, int page, int rows);
 
+    //商户通过条件查询
+    public PageVo<Orders> queryShangHuOrderCount(Orders order, int page, int rows);
+
+    //修改状态（待提货）
+    public int updOrder3(Orders orders);
+
     //修改状态（确定收货）
     public int updOrder4(Orders orders);
 

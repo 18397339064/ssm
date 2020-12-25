@@ -40,6 +40,17 @@ public class OrderServiceImpl implements OrderService {
         return pageVo;
     }
 
+    @Override
+    public PageVo<Orders> queryShangHuOrderCount(Orders order, int page, int rows) {
+        PageVo<Orders> pageVo = new PageVo<>();
+        //放在 查询代码的前面
+        PageHelper.startPage(page,rows);
+        pageVo.setRows(orderDao.queryShangHuOrder(order));
+        pageVo.setTotal(orderDao.queryShangHuOrderCount(order));
+
+        return pageVo;
+    }
+
     //根据月份查询商品出库统计
     @Override
     public List<TongJi> queryChuKuTotalByMonth(String month) {
@@ -50,6 +61,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<TongJi> queryRevenueByMonth(String month) {
         return orderDao.queryRevenueByMonth(month);
+    }
+
+    //修改状态(待提货)
+    @Override
+    public int updOrder3(Orders orders) {
+        return orderDao.updOrder3(orders);
     }
 
     //修改状态（确定收货）

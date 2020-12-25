@@ -60,4 +60,10 @@ public class StockServiceImpl implements StockService {
     public int queryStockComid(int comid) {
         return stockDao.queryStockComid(comid);
     }
+
+    //查询商品的库存数量
+    @Override
+    public int queryStockCount(int comid) {
+        return stockDao.queryStockCount(comid);
+    }
 }

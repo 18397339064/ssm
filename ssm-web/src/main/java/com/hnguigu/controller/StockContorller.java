@@ -94,4 +94,13 @@ public class StockContorller {
 
         return JSONObject.toJSONString(stockDao.queryAllId(id));
     }
+
+    //查询商品库存数量
+    @RequestMapping("/querystockcount.action")
+    @ResponseBody
+    @CrossOrigin
+    public int queryStockCount(int comid){
+
+        return stockService.queryStockCount(comid);
+    }
 }

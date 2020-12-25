@@ -60,6 +60,33 @@ public class OrderController {
         return orderService.queryUserOrderCount(order,page,rows);
     }
 
+    //商户查询记录
+    @RequestMapping("/queryShangHuOrderCount.action")
+    @ResponseBody
+    @CrossOrigin
+    public PageVo<Orders> queryShangHuOrderCount(Orders order,
+                                              @RequestParam("shid") int shid,
+                                              @RequestParam(value = "page", defaultValue = "1") int page,
+                                              @RequestParam(value = "rows", defaultValue = "10") int rows){
+        order.getShangHuInfo().setShid(shid);
+        System.out.println("------------------------------------------------");
+        System.out.println(order.getOrderstate());
+        return orderService.queryShangHuOrderCount(order,page,rows);
+    }
+
+    @RequestMapping("/updOrder3.action")
+    @ResponseBody
+    @CrossOrigin
+    public String updOrder3(Orders order){
+        System.out.println("------------------------------------------------");
+        System.out.println(order.getOrderstate());
+        int num = orderService.updOrder3(order);
+        if(num==0){
+            return "确认失败";
+        }
+        return "确认成功";
+    }
+
     @RequestMapping("/updOrder4.action")
     @ResponseBody
     @CrossOrigin

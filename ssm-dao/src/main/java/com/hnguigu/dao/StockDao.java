@@ -31,4 +31,7 @@ public interface StockDao {
     //审核出库成功  减少库存
     int janStock();
 
+    //查询商品的库存数量
+    public int queryStockCount(int comid);
+
 }

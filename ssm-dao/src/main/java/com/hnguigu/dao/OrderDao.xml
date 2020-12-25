@@ -67,7 +67,7 @@
         INNER JOIN commodity ON `orders`.`comid`=commodity.`comid`
         INNER JOIN category ON commodity.`ctid`=category.`ctid`
        WHERE ordertime LIKE CONCAT('2020-',#{month},'%')
-        AND `orders`.`orderstate`='已完成'
+        AND `orders`.`orderstate`='3'
           GROUP BY category.`ctname`
     </select>
 	<!-- 用户通过条件查询 -->
@@ -103,6 +103,44 @@
 			<if test="orderstate==5">and orderstate=4</if>
 		</where>
 	</select>
+
+	<!-- 商户通过条件查询 -->
+	<select id="queryShangHuOrder" parameterType="Orders" resultMap="ordermap">
+
+		SELECT * FROM orders LEFT JOIN commodity ON orders.comid=commodity.comid
+		LEFT JOIN USER ON user.`userid`=orders.`userid`
+		LEFT JOIN shanghu ON shanghu.`shid`=orders.`shid`
+		<where>
+			<!--<if test="true">and user.`userid`=#{userid}</if>-->
+			<if test="true">shanghu.shid = #{shangHuInfo.shid}</if>
+			<if test="orderstate==0">and orderstate in(2,1,3,4)</if>
+			<if test="orderstate==1">and orderstate=1</if>
+			<if test="orderstate==2">and orderstate=2</if>
+			<if test="orderstate==3">and orderstate=3</if>
+			<if test="orderstate==5">and orderstate=4</if>
+		</where>
+	</select>
+
+	<!-- 商户通过条件查询记录 -->
+	<select id="queryShangHuOrderCount" parameterType="Orders" resultType="int">
+
+		SELECT count(*) FROM orders LEFT JOIN commodity ON orders.comid=commodity.comid
+		LEFT JOIN USER ON user.`userid`=orders.`userid`
+		LEFT JOIN shanghu ON shanghu.`shid`=orders.`shid`
+		<where>
+			<!--<if test="true">and user.`userid`=#{userid}</if>-->
+			<if test="true">shanghu.shid = #{shangHuInfo.shid}</if>
+			<if test="orderstate==0">and orderstate in(2,1,3,4)</if>
+			<if test="orderstate==1">and orderstate=1</if>
+			<if test="orderstate==2">and orderstate=2</if>
+			<if test="orderstate==3">and orderstate=3</if>
+			<if test="orderstate==5">and orderstate=4</if>
+		</where>
+	</select>
+
+	<update id="updOrder3" parameterType="Orders">
+		update orders set orderstate = 3 where orderid=#{orderid}
+	</update>
 
 	<update id="updOrder4" parameterType="Orders">
 		update orders set orderstate = 4 where orderid=#{orderid}
