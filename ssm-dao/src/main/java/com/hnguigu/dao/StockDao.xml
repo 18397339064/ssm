@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--查询该商品在库存中是否存在-->
 	<select id="queryCom" parameterType="int" resultMap="BaseMapper">
-		SELECT * FROM stock WHERE comid=#{comid} and whid=#{whid};
+		SELECT * FROM stock WHERE comid=#{commodity.comid};
 	</select>
 
 	<!-- 判断是否有某个商品在库存中有，如果有不能删除-->
@@ -81,4 +81,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryAllStockCapacity" resultMap="BaseMapper">
 		select whid,sum(stockcount) stockcount from stock group by whid
 	</select>
+	<!--查询商品的库存数量-->
+	<select id="queryStockCount" parameterType="int" resultType="int">
+		SELECT SUM(stockcount) FROM stock WHERE comid=#{commodity.comid}
+	</select>
+
 </mapper>

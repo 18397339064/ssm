@@ -18,7 +18,7 @@ public class Orders {
     private Integer userid;
     private User user = new User();
     private Integer shid;
-    private ShangHuInfo shangHuInfo;
+    private ShangHuInfo shangHuInfo=new ShangHuInfo();
     private Float totalmoney;
     private int orderstate;
 

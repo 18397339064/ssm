@@ -30,4 +30,7 @@ public interface StockService {
 
     //查询所有 仓库的 当前 已占用的库存
     List<Stock> queryAllStockCapacity();
+    //查询商品的库存数量
+    public int queryStockCount(int comid);
+
 }

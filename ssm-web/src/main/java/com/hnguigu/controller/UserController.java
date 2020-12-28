@@ -135,9 +135,12 @@ public class UserController {
             map.put("usersh",user1.getUsersh().toString());
 
             ShangHuInfo shangHuInfo=shangHuService.queryuserid(user1.getUserid());
-            map.put("shid",shangHuInfo.getShid()+"");
-            map.put("shname",shangHuInfo.getShname());
-            map.put("shaddress",shangHuInfo.getShaddress());
+            if(shangHuInfo!=null){
+                map.put("shid",shangHuInfo.getShid()+"");
+                map.put("shname",shangHuInfo.getShname());
+                map.put("shaddress",shangHuInfo.getShaddress());
+            }
+
 
         }else{
             map.put("msg","登录失败");
@@ -213,12 +216,9 @@ public class UserController {
             }else if(shangHuInfo.getShstate().equals("已通过")){
                 map.put("msg","该用户已经是商户，不可重复注册");
                 map.put("code","2");
-            }else if(shangHuInfo.getShstate().equals("已驳回")){
-                map.put("msg","该用户申请注册商户不通过，请重新申请");
-                map.put("code","3");
             }else if(shangHuInfo.getShstate().equals("未审核")){
                 map.put("msg","该用户待审核中，请稍后。。。");
-                map.put("code","4");
+                map.put("code","3");
             }
 
         }else{

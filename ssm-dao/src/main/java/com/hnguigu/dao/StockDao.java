@@ -24,7 +24,7 @@ public interface StockDao {
     public int updateCountJia(Stock stock);
 
     //查询该商品在库存中是否存在
-    public Stock queryCom(@Param("comid") int comid,@Param("whid") int whid);
+    public Stock queryCom(int comid);
 
     //判断是否有某个商品在库存中有，如果有不能删除
     public int queryStockComid(int comid);
@@ -37,4 +37,7 @@ public interface StockDao {
 
     //查询所有 仓库的 当前 已占用的库存
     List<Stock> queryAllStockCapacity();
+    //查询商品的库存数量
+    public int queryStockCount(int comid);
+
 }
