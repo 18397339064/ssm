@@ -74,9 +74,10 @@ public class PurchaseController {
         if(num==1){
             //加到库存里面
             //如果库存里面有该商品就直接加数量，没有该商品就加商品
-            Stock stock=stockService.queryCom(comid);
+            Stock stock=stockService.queryCom(comid,whid);
             if(stock!=null){
                 Stock stock2=new Stock();
+                stock2.getWarehouse().setWhid(whid);
                 stock2.getCommodity().setComid(comid);
                 stock2.setStockcount(purcount);
                 stockService.updateCountJia(stock2);
@@ -94,6 +95,7 @@ public class PurchaseController {
         return "通过失败";
     }
 
+
     //审核失败
     @RequestMapping(value = "/updPurNo.action")
     @ResponseBody
@@ -104,6 +106,41 @@ public class PurchaseController {
             return "已驳回";
         }
         return "驳回失败";
+    }
+
+
+    //多库分配
+    @RequestMapping(value = "manyWarehouseUpdPurYes.action",produces = "application/json")
+    @ResponseBody
+    @CrossOrigin
+    public String manyWarehouseUpdPurYes(@RequestBody List<CaiGouUtil> list){
+
+
+        int num =  purchaseService.updPurYes(list.get(0).getPurid());
+        if(num==1){
+        for(CaiGouUtil c:list){
+            //加到库存里面
+            //如果库存里面有该商品就直接加数量，没有该商品就加商品
+            Stock stock=stockService.queryCom(c.getComid(),c.getWhid());
+            if(stock!=null){
+                Stock stock2=new Stock();
+                stock2.getWarehouse().setWhid(c.getWhid());
+                stock2.getCommodity().setComid(c.getComid());
+                stock2.setStockcount(c.getPurcount());
+                stockService.updateCountJia(stock2);
+            }else{
+                //查询该商品是什么类型，放入哪个仓库
+                Stock stock1=new Stock();
+                stock1.getWarehouse().setWhid(c.getWhid());
+                stock1.getCommodity().setComid(c.getComid());
+                stock1.setStockcount(c.getPurcount());
+                stockService.add(stock1);
+            }
+        }
+
+            return "已通过";
+        }
+        return "通过失败";
     }
 
 }

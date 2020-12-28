@@ -55,12 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--修改数量（增加）-->
 	<update id="updateCountJia" parameterType="Stock">
 		update stock set stockcount=stockcount+#{stockcount}
-		where comid=#{commodity.comid}
+		where comid=#{commodity.comid} and whid=#{warehouse.whid}
 	</update>
 
 	<!--查询该商品在库存中是否存在-->
 	<select id="queryCom" parameterType="int" resultMap="BaseMapper">
-		SELECT * FROM stock WHERE comid=#{commodity.comid};
+		SELECT * FROM stock WHERE comid=#{comid} and whid=#{whid};
 	</select>
 
 	<!-- 判断是否有某个商品在库存中有，如果有不能删除-->
@@ -69,9 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 	<update id="janStock" parameterType="Stock">
-	 update stock stockcount-=#{stockcount} where comid=#{commodity.comid}
+	 update stock stockcount-=#{stockcount} where comid=#{commodity.comid} and whid=#{warehouse.whid}
 	</update>
 
+	<!--查询当前仓库的 所有商品 占用的库存-->
+	<select id="queryStockCapacity" parameterType="int" resultType="int">
+		select sum(stockcount) from stock where whid=#{whid}
+	</select>
+
+	<!--查询所有 仓库的 当前 已占用的库存-->
+	<select id="queryAllStockCapacity" resultMap="BaseMapper">
+		select whid,sum(stockcount) stockcount from stock group by whid
+	</select>
 	<!--查询商品的库存数量-->
 	<select id="queryStockCount" parameterType="int" resultType="int">
 		SELECT SUM(stockcount) FROM stock WHERE comid=#{commodity.comid}

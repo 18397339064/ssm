@@ -8,6 +8,25 @@ public class CaiGouUtil {
     private Integer staffid;
     private Float  jinprice;
 
+    private Integer whid;
+
+    private Integer purid;
+
+    public Integer getWhid() {
+        return whid;
+    }
+
+    public void setWhid(Integer whid) {
+        this.whid = whid;
+    }
+
+    public Integer getPurid() {
+        return purid;
+    }
+
+    public void setPurid(Integer purid) {
+        this.purid = purid;
+    }
 
     public Integer getSupid() {
         return supid;
