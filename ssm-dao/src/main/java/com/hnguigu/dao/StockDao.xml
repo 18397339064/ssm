@@ -55,12 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--修改数量（增加）-->
 	<update id="updateCountJia" parameterType="Stock">
 		update stock set stockcount=stockcount+#{stockcount}
-		where comid=#{commodity.comid}
+		where comid=#{commodity.comid} and whid=#{whid}
 	</update>
 
 	<!--查询该商品在库存中是否存在-->
 	<select id="queryCom" parameterType="int" resultMap="BaseMapper">
-		SELECT * FROM stock WHERE comid=#{commodity.comid};
+		SELECT * FROM stock WHERE comid=#{comid} and whid=#{whid};
 	</select>
 
 	<!-- 判断是否有某个商品在库存中有，如果有不能删除-->

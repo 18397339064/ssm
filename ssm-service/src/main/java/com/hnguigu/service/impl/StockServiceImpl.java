@@ -53,8 +53,8 @@ public class StockServiceImpl implements StockService {
 
     //查询该商品在库存中是否存在
     @Override
-    public Stock queryCom(int comid) {
-        return stockDao.queryCom(comid);
+    public Stock queryCom(int comid,int whid) {
+        return stockDao.queryCom(comid,whid);
     }
 
     //判断是否有某个商品在库存中有，如果有不能删除
