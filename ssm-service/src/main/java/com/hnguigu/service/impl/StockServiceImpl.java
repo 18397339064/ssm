@@ -8,6 +8,8 @@ import com.hnguigu.vo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StockServiceImpl implements StockService {
 
@@ -51,13 +53,23 @@ public class StockServiceImpl implements StockService {
 
     //查询该商品在库存中是否存在
     @Override
-    public Stock queryCom(int comid) {
-        return stockDao.queryCom(comid);
+    public Stock queryCom(int comid,int whid) {
+        return stockDao.queryCom(comid,whid);
     }
 
     //判断是否有某个商品在库存中有，如果有不能删除
     @Override
     public int queryStockComid(int comid) {
         return stockDao.queryStockComid(comid);
+    }
+
+    @Override
+    public int queryStockCapacity(int whid) {
+        return stockDao.queryStockCapacity(whid);
+    }
+
+    @Override
+    public List<Stock> queryAllStockCapacity() {
+        return stockDao.queryAllStockCapacity();
     }
 }
