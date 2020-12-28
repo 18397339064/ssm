@@ -138,4 +138,30 @@ public class OrderController {
         }
         return "删除成功";
     }
+
+    @RequestMapping("/addOrder.action")
+    @ResponseBody
+    @CrossOrigin
+    public String addOrder(Orders order){
+        System.out.println("------------------------------------------------");
+        System.out.println(order.getOrderstate());
+        int num = orderService.addOrder1(order);
+        if(num==0){
+            return "支付失败";
+        }
+        return "支付成功";
+    }
+
+    @RequestMapping("/updOrder2.action")
+    @ResponseBody
+    @CrossOrigin
+    public String updOrder2(Orders order){
+        System.out.println("------------------------------------------------");
+        System.out.println(order.getOrderstate());
+        int num = orderService.updOrder2(order);
+        if(num==0){
+            return "失败";
+        }
+        return "删除成功";
+    }
 }
