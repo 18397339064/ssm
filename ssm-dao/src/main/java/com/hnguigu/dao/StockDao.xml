@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--修改数量（增加）-->
 	<update id="updateCountJia" parameterType="Stock">
 		update stock set stockcount=stockcount+#{stockcount}
-		where comid=#{commodity.comid} and whid=#{whid}
+		where comid=#{commodity.comid} and whid=#{warehouse.whid}
 	</update>
 
 	<!--查询该商品在库存中是否存在-->
