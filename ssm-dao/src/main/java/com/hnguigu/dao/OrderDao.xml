@@ -163,4 +163,16 @@
 		update orders set orderstate = 2 where orderid=#{orderid}
 	</update>
 
+
+	<insert id="addOrder1" parameterType="Orders">
+		insert into orders values(#{orderid},#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},0)
+	</insert>
+
+	<insert id="addOrder2" parameterType="Orders">
+		insert into orders values(#{orderid},#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},1)
+	</insert>
+
+	<update id="updOrder2" parameterType="Orders">
+		update orders set orderstate = 1 where orderid=#{orderid}
+	</update>
 </mapper>

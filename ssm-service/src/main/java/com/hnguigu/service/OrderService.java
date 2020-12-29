@@ -48,4 +48,13 @@ public interface OrderService {
 
     //修改状态（商家发货 已出库）
     int updateOrderState(Orders orders);
+
+    //添加订单（未付款）
+    public int addOrder1(Orders orders);
+
+    //添加订单(已付款)
+    public int addOrder2(Orders orders);
+
+    //用户点击付款
+    public int updOrder2(Orders orders);
 }

@@ -93,4 +93,19 @@ public class OrderServiceImpl implements OrderService {
     public int updateOrderState(Orders orders) {
         return orderDao.updateOrderState(orders);
     }
+
+    @Override
+    public int addOrder1(Orders orders) {
+        return orderDao.addOrder1(orders);
+    }
+
+    @Override
+    public int addOrder2(Orders orders) {
+        return orderDao.addOrder2(orders);
+    }
+
+    @Override
+    public int updOrder2(Orders orders) {
+        return orderDao.updOrder2(orders);
+    }
 }
