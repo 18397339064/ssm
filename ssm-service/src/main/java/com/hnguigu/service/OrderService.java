@@ -3,6 +3,7 @@ package com.hnguigu.service;
 import com.hnguigu.vo.Orders;
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.TongJi;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -49,9 +50,14 @@ public interface OrderService {
     //添加订单（未付款）
     public int addOrder1(Orders orders);
 
-    //添加订单(已付款)
-    public int addOrder2(Orders orders);
-
     //用户点击付款
-    public int updOrder2(Orders orders);
+    public int updOrder2(String orders);
+
+    //查询订单编号是否存在
+    public int queryZhiFuBao(Orders orders);
+
+    //根据月份和商户查询商户统计营收
+    public List<TongJi> queryShangHuRevenueByMonth(@Param("month") String month,
+                                                   @Param("shid") int shid);
+
 }

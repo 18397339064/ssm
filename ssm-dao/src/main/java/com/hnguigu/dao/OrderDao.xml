@@ -7,10 +7,12 @@
 
 	<resultMap id="ordermap" type="Orders">
 		<id column="orderid" property="orderid"></id>
-		<id column="ordertime" property="ordertime"></id>
-		<id column="ordercount" property="ordercount"></id>
-		<id column="totalmoney" property="totalmoney"></id>
-		<id column="orderstate" property="orderstate"></id>
+		<result column="ordertime" property="ordertime"></result>
+		<result column="ordercount" property="ordercount"></result>
+		<result column="totalmoney" property="totalmoney"></result>
+		<result column="orderstate" property="orderstate"></result>
+        <result column="zhiFuBao" property="zhiFuBao"></result>
+
 
 		<association property="commodity" javaType="Commodity" column="comid" fetchType="lazy">
 			<result column="comid" property="comid"></result>
@@ -67,7 +69,7 @@
         INNER JOIN commodity ON `orders`.`comid`=commodity.`comid`
         INNER JOIN category ON commodity.`ctid`=category.`ctid`
        WHERE ordertime LIKE CONCAT('2020-',#{month},'%')
-        AND `orders`.`orderstate`='3'
+        AND `orders`.`orderstate`='4'
           GROUP BY category.`ctname`
     </select>
 	<!-- 用户通过条件查询 -->
@@ -159,14 +161,24 @@
 	</update>
 	
 	<insert id="addOrder1" parameterType="Orders">
-		insert into orders values(#{orderid},#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},0)
+		insert into orders values(null,#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},0,#{zhiFuBao})
 	</insert>
 
-	<insert id="addOrder2" parameterType="Orders">
-		insert into orders values(#{orderid},#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},1)
-	</insert>
-
-	<update id="updOrder2" parameterType="Orders">
-		update orders set orderstate = 1 where orderid=#{orderid}
+	<update id="updOrder2" parameterType="String">
+		update orders set orderstate = 1 where zhiFuBao=#{orders}
 	</update>
+
+	<select id="queryZhiFuBao" parameterType="Orders" resultType="int">
+		select count(*) from orders where zhiFuBao =#{zhiFuBao}
+	</select>
+
+	<select id="queryShangHuRevenueByMonth" resultType="TongJi">
+    SELECT category.`ctname` AS `type`,SUM(orders.`totalmoney`)*0.05 AS num FROM `orders`
+        INNER JOIN commodity ON `orders`.`comid`=commodity.`comid`
+        INNER JOIN category ON commodity.`ctid`=category.`ctid`
+        INNER JOIN shanghu ON shanghu.shid=orders.shid
+       WHERE ordertime LIKE CONCAT('2020-',#{month},'%')
+        AND `orders`.`orderstate`='4' AND orders.shid=#{shid}
+          GROUP BY category.`ctname`
+    </select>
 </mapper>

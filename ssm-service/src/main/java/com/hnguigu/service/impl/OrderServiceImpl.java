@@ -9,6 +9,7 @@ import com.hnguigu.vo.TongJi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -91,16 +92,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int addOrder1(Orders orders) {
+        orders.setOrdertime(new Date());
         return orderDao.addOrder1(orders);
     }
 
     @Override
-    public int addOrder2(Orders orders) {
-        return orderDao.addOrder2(orders);
+    public int updOrder2(String orders) {
+        return orderDao.updOrder2(orders);
     }
 
     @Override
-    public int updOrder2(Orders orders) {
-        return orderDao.updOrder2(orders);
+    public int queryZhiFuBao(Orders orders) {
+        return orderDao.queryZhiFuBao(orders);
+    }
+
+    //根据月份和商户查询商户统计营收
+    @Override
+    public List<TongJi> queryShangHuRevenueByMonth(String month, int shid) {
+        return orderDao.queryShangHuRevenueByMonth(month,shid);
     }
 }

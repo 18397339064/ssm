@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Orders {
 
-    private String orderid;
+    private int orderid;
     private Integer comid;
     private Commodity commodity = new Commodity();
 
@@ -21,12 +21,13 @@ public class Orders {
     private ShangHuInfo shangHuInfo=new ShangHuInfo();
     private Float totalmoney;
     private int orderstate;
+    private String zhiFuBao;
 
-    public String getOrderid() {
+    public int getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(String orderid) {
+    public void setOrderid(int orderid) {
         this.orderid = orderid;
     }
 
@@ -110,10 +111,18 @@ public class Orders {
         this.shid = shid;
     }
 
+    public String getZhiFuBao() {
+        return zhiFuBao;
+    }
+
+    public void setZhiFuBao(String zhiFuBao) {
+        this.zhiFuBao = zhiFuBao;
+    }
+
     public Orders() {
     }
 
-    public Orders(String orderid, Integer comid, Commodity commodity, Date ordertime, Integer ordercount, Integer userid, User user, Integer shid, ShangHuInfo shangHuInfo, Float totalmoney, int orderstate) {
+    public Orders(int orderid, Integer comid, Commodity commodity, Date ordertime, Integer ordercount, Integer userid, User user, Integer shid, ShangHuInfo shangHuInfo, Float totalmoney, int orderstate, String zhiFuBao) {
         this.orderid = orderid;
         this.comid = comid;
         this.commodity = commodity;
@@ -125,12 +134,13 @@ public class Orders {
         this.shangHuInfo = shangHuInfo;
         this.totalmoney = totalmoney;
         this.orderstate = orderstate;
+        this.zhiFuBao = zhiFuBao;
     }
 
     @Override
     public String toString() {
         return "Orders{" +
-                "orderid='" + orderid + '\'' +
+                "orderid=" + orderid +
                 ", comid=" + comid +
                 ", commodity=" + commodity +
                 ", ordertime=" + ordertime +
@@ -141,6 +151,7 @@ public class Orders {
                 ", shangHuInfo=" + shangHuInfo +
                 ", totalmoney=" + totalmoney +
                 ", orderstate=" + orderstate +
+                ", zhiFuBao='" + zhiFuBao + '\'' +
                 '}';
     }
 }

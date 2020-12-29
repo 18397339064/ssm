@@ -27,10 +27,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutIXki/QNMQ+zTKgPcgArTabkSOdYmxi9MIiz9Gtx11K7oOlG28sdP9uvHpltTErJGzjl9w2ude6E2kIFLyulHFcHkN4/EErZKNKqZ8y77fmp35y542UQzhh3WUtOXA/GTb7x7a8JQGmjrqi+vYyOw6jWaD+CK/tqnmG7j5w0th9kiQ5x6MX2prU1fgJWfFULI5iRTHOM7KlZUmY+mTf93Nrln/aMl4p/2nd7Tq54r/fLRCysNAI9bKQkCpENVlwV6Kv2Xqw1NGS+36Pseq9hw9kDF+zgru1Jaks1vpyHk3Ryj4gu1OeDVIYm2okB5CWNTtIcn2GGtCu9Hp0ZUVcBwIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://localhost:8080/ssm_web/notify_url.jsp";
+	public static String notify_url = "http://localhost:8080/ssm_web/notify_url";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://localhost:8080/ssm_web/return_url.jsp";
+	public static String return_url = "http://localhost:8080/ssm_web/return_url";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

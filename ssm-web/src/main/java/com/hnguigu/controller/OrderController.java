@@ -147,21 +147,37 @@ public class OrderController {
         System.out.println(order.getOrderstate());
         int num = orderService.addOrder1(order);
         if(num==0){
-            return "支付失败";
+            return "添加失败";
         }
-        return "支付成功";
+        return "添加成功";
     }
 
     @RequestMapping("/updOrder2.action")
     @ResponseBody
     @CrossOrigin
-    public String updOrder2(Orders order){
+    public String updOrder2(String order){
         System.out.println("------------------------------------------------");
-        System.out.println(order.getOrderstate());
         int num = orderService.updOrder2(order);
         if(num==0){
-            return "失败";
+            return "修改失败";
         }
-        return "删除成功";
+        return "修改成功";
+    }
+
+    @RequestMapping("/queryZhiFuBao.action")
+    @ResponseBody
+    @CrossOrigin
+    public int queryZhiFuBao(Orders order){
+        System.out.println("------------------------------------------------");
+        return orderService.queryZhiFuBao(order);
+    }
+
+    //根据月份和商户查询商户统计营收
+    @RequestMapping("/shanghurevenuetongji.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<TongJi> queryShangHuRevenueByMonth(@RequestParam("month") String month,
+                                                   @RequestParam("shid") int shid){
+        return orderService.queryShangHuRevenueByMonth(month,shid);
     }
 }
