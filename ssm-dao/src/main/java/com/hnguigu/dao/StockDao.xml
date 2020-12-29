@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<!--查询当前仓库的 所有商品 占用的库存-->
-	<select id="queryStockCapacity" parameterType="int" resultType="int">
+	<select id="queryStockCapacity" parameterType="int" resultType="String">
 		select sum(stockcount) from stock where whid=#{whid}
 	</select>
 
@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!--查询当前仓库 这个商品的 库存数量-->
-	<select id="queryWarehouseStockCount" parameterType="int" resultType="int">
+	<select id="queryWarehouseStockCount" parameterType="int" resultType="String">
 		SELECT SUM(stockcount) FROM stock WHERE comid=#{comid} and whid=#{whid}
 	</select>
 	

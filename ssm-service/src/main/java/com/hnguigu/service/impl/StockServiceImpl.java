@@ -64,7 +64,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public int queryStockCapacity(int whid) {
+    public String queryStockCapacity(int whid) {
         return stockDao.queryStockCapacity(whid);
     }
 
@@ -80,7 +80,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public int queryWarehouseStockCount(int comid, int whid) {
+    public String queryWarehouseStockCount(int comid, int whid) {
         return stockDao.queryWarehouseStockCount(comid,whid);
     }
 

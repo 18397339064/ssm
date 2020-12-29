@@ -103,7 +103,7 @@ public class StockContorller {
     @RequestMapping("/queryStockCapacity.action")
     @ResponseBody
     @CrossOrigin
-    public int queryStockCapacity(int whid){
+    public String queryStockCapacity(int whid){
 
         return stockDao.queryStockCapacity(whid);
     }
@@ -131,7 +131,7 @@ public class StockContorller {
     @RequestMapping("/queryWarehouseStockCount.action")
     @ResponseBody
     @CrossOrigin
-    public int queryWarehouseStockCount(@RequestParam("comid")int comid, @RequestParam("whid")int whid){
+    public String queryWarehouseStockCount(@RequestParam("comid")int comid, @RequestParam("whid")int whid){
 
 
         return stockService.queryWarehouseStockCount(comid,whid);

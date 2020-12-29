@@ -33,7 +33,7 @@ public interface StockDao {
     int janStock(Stock stock);
 
     //查询当前仓库的 所有商品 占用的库存
-    int queryStockCapacity(int whid);
+    String queryStockCapacity(int whid);
 
     //查询所有 仓库的 当前 已占用的库存
     List<Stock> queryAllStockCapacity();
@@ -41,7 +41,7 @@ public interface StockDao {
     public int queryStockCount(int comid);
 
     //<!--查询当前仓库 这个商品的 库存数量-->
-    int queryWarehouseStockCount(@Param("comid")int comid,@Param("whid")int whid);
+    String queryWarehouseStockCount(@Param("comid")int comid,@Param("whid")int whid);
 
     //查询所有 商品 的库存数量
     List<Stock> queryAllWarehouseStockCount(int comid);

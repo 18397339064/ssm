@@ -23,6 +23,7 @@
 		<association property="user" javaType="User" column="userid" fetchType="lazy">
 			<result column="userid" property="userid"></result>
 			<result column="username" property="username"></result>
+			<result column="useraccount" property="useraccount"></result>
 		</association>
 
 		<association property="shangHuInfo" javaType="ShangHuInfo" column="shid" fetchType="lazy">
@@ -39,6 +40,8 @@
 		INNER JOIN USER ON user.`userid`=orders.`userid`
 		INNER JOIN shanghu ON shanghu.`shid`=orders.`shid`
 		<where>
+
+			orderstate NOT IN (0,7)
 			<!--<if test="true">and user.`userid`=#{userid}</if>-->
 			<if test="orderstate!=null and orderstate!='' and orderstate!=0">and orderstate=#{orderstate}</if>
 		</where>
@@ -51,6 +54,7 @@
 		INNER JOIN USER ON user.`userid`=orders.`userid`
 		INNER JOIN shanghu ON shanghu.`shid`=orders.`shid`
 		<where>
+			orderstate NOT IN (0,7)
 			<!--<if test="true">and user.`userid`=#{userid}</if>-->
 			<if test="orderstate!=null and orderstate!=''">and orderstate=#{orderstate}</if>
 		</where>
