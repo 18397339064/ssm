@@ -91,6 +91,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int updateOrderState(Orders orders) {
+        return orderDao.updateOrderState(orders);
+    }
+
+    @Override
     public int addOrder1(Orders orders) {
         orders.setOrdertime(new Date());
         return orderDao.addOrder1(orders);

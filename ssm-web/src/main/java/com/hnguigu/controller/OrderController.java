@@ -1,16 +1,12 @@
 package com.hnguigu.controller;
 
 import com.hnguigu.service.OrderService;
-import com.hnguigu.vo.Menu;
-import com.hnguigu.vo.Orders;
-import com.hnguigu.vo.PageVo;
-import com.hnguigu.vo.TongJi;
+import com.hnguigu.service.StockService;
+import com.hnguigu.vo.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +15,9 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    StockService stockService;
 
     //订单状态查询
     @RequestMapping("/queryordercount.action")
@@ -137,6 +136,59 @@ public class OrderController {
             return "删除失败";
         }
         return "删除成功";
+    }
+
+
+    @RequestMapping("/updateOrderState.action")
+    @ResponseBody
+    @CrossOrigin
+    public String updateOrderState(Orders orders,
+                                   @RequestParam("comid")int comid,
+                                   @RequestParam("whid")int whid,
+                                   @RequestParam("purcount")int purcount){
+
+        int num=orderService.updateOrderState(orders);
+
+        if(num!=0){
+
+          Stock stock=new Stock();
+          stock.getWarehouse().setWhid(whid);
+          stock.getCommodity().setComid(comid);
+          stock.setStockcount(purcount);
+          stockService.janStock(stock);
+
+          return "出库成功!";
+        }
+        return "出库失败!";
+    }
+
+
+    @RequestMapping(value = "/manyUpdateOrderStates.action",produces = "application/json")
+    @ResponseBody
+    @CrossOrigin
+    public String manyUpdateOrderStates(@RequestBody List<CaiGouUtil> list){
+
+        Orders orders=new Orders();
+        orders.setOrderid(list.get(0).getOrderid());
+        int num=orderService.updateOrderState(orders);
+        System.out.println("---------------");
+        System.out.println(list.toString());
+        if(num!=0){
+
+            for (CaiGouUtil s:list){
+
+                Stock stock=new Stock();
+                stock.getWarehouse().setWhid(s.getWhid());
+                stock.getCommodity().setComid(s.getComid());
+                stock.setStockcount(s.getPurcount());
+                stockService.janStock(stock);
+
+            }
+
+            return "出库成功!";
+        }
+
+        return "出库失败!";
     }
 
     @RequestMapping("/addOrder.action")

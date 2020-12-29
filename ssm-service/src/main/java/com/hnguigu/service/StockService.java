@@ -2,6 +2,7 @@ package com.hnguigu.service;
 
 import com.hnguigu.vo.PageVo;
 import com.hnguigu.vo.Stock;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,4 +34,12 @@ public interface StockService {
     //查询商品的库存数量
     public int queryStockCount(int comid);
 
+    //<!--查询当前仓库 这个商品的 库存数量-->
+    int queryWarehouseStockCount(@Param("comid")int comid, @Param("whid")int whid);
+
+    //审核出库成功  减少库存
+    int janStock(Stock stock);
+
+    //查询所有 商品 的库存数量
+    List<Stock> queryAllWarehouseStockCount(int comid);
 }

@@ -40,7 +40,7 @@
 		INNER JOIN shanghu ON shanghu.`shid`=orders.`shid`
 		<where>
 			<!--<if test="true">and user.`userid`=#{userid}</if>-->
-			<if test="orderstate!=null and orderstate!=''">and orderstate=#{orderstate}</if>
+			<if test="orderstate!=null and orderstate!='' and orderstate!=0">and orderstate=#{orderstate}</if>
 		</where>
 	</select>
 
@@ -159,7 +159,13 @@
 	<update id="delOrder2" parameterType="Orders">
 		update orders set orderstate = 7 where orderid=#{orderid}
 	</update>
-	
+
+	<!-- 商品出库 减库存-->
+	<update id="updateOrderState" parameterType="Orders">
+		update orders set orderstate = 2 where orderid=#{orderid}
+	</update>
+
+
 	<insert id="addOrder1" parameterType="Orders">
 		insert into orders values(null,#{commodity.comid},#{ordertime},#{ordercount},#{user.userid},#{shangHuInfo.shid},#{totalmoney},0,#{zhiFuBao})
 	</insert>
