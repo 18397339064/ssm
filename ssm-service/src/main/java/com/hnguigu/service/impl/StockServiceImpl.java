@@ -78,4 +78,20 @@ public class StockServiceImpl implements StockService {
     public int queryStockCount(int comid) {
         return stockDao.queryStockCount(comid);
     }
+
+    @Override
+    public int queryWarehouseStockCount(int comid, int whid) {
+        return stockDao.queryWarehouseStockCount(comid,whid);
+    }
+
+    @Override
+    public int janStock(Stock stock) {
+        return stockDao.janStock(stock);
+    }
+
+    @Override
+    public List<Stock> queryAllWarehouseStockCount(int comid) {
+        return stockDao.queryAllWarehouseStockCount(comid);
+    }
+
 }

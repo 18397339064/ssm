@@ -53,4 +53,7 @@ public interface OrderDao {
 
     //删除订单（已发货）
     public int delOrder2(Orders orders);
+
+    //修改状态（已出库）
+    int updateOrderState(Orders orders);
 }

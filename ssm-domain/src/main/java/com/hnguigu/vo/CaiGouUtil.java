@@ -7,10 +7,26 @@ public class CaiGouUtil {
     private Integer purcount;
     private Integer staffid;
     private Float  jinprice;
-
     private Integer whid;
-
     private Integer purid;
+    private String orderid;
+    private Integer orderstate;
+
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
+    }
+
+    public Integer getOrderstate() {
+        return orderstate;
+    }
+
+    public void setOrderstate(Integer orderstate) {
+        this.orderstate = orderstate;
+    }
 
     public Integer getWhid() {
         return whid;

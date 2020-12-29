@@ -1,9 +1,11 @@
 package com.hnguigu.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hnguigu.dao.StockDao;
 import com.hnguigu.service.StockService;
 import com.hnguigu.vo.Stock;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -122,5 +124,25 @@ public class StockContorller {
     public int queryStockCount(int comid){
 
         return stockService.queryStockCount(comid);
+    }
+
+
+    //<!--查询当前仓库 这个商品的 库存数量-->
+    @RequestMapping("/queryWarehouseStockCount.action")
+    @ResponseBody
+    @CrossOrigin
+    public int queryWarehouseStockCount(@RequestParam("comid")int comid, @RequestParam("whid")int whid){
+
+
+        return stockService.queryWarehouseStockCount(comid,whid);
+    }
+
+    //查询不同仓库 商品 的库存数量
+    @RequestMapping("/queryAllWarehouseStockCount.action")
+    @ResponseBody
+    @CrossOrigin
+    public String queryAllWarehouseStockCount(@RequestParam("comid")int comid){
+
+        return JSONObject.toJSONString(stockService.queryAllWarehouseStockCount(comid));
     }
 }

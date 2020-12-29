@@ -88,4 +88,9 @@ public class OrderServiceImpl implements OrderService {
     public int delOrder2(Orders orders){
         return orderDao.delOrder2(orders);
     }
+
+    @Override
+    public int updateOrderState(Orders orders) {
+        return orderDao.updateOrderState(orders);
+    }
 }
