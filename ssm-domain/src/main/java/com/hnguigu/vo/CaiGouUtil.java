@@ -9,14 +9,14 @@ public class CaiGouUtil {
     private Float  jinprice;
     private Integer whid;
     private Integer purid;
-    private String orderid;
+    private Integer orderid;
     private Integer orderstate;
 
-    public String getOrderid() {
+    public Integer getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(String orderid) {
+    public void setOrderid(Integer orderid) {
         this.orderid = orderid;
     }
 
